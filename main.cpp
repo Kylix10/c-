@@ -1,4 +1,5 @@
-#include "scene.h"
+#include "mydialog.h"
+
 
 #include <QApplication>
 #include <QLocale>
@@ -18,7 +19,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    Scene w1;//开始
+    MyDialog w1;//开始
 
     w1.show();//展示界面1
 

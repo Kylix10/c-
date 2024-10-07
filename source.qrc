@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/new/prefix1">
         <file>character1.png</file>
+        <file>dialogue_back.jpg</file>
+        <file>dialogue.png</file>
+        <file>black.jpg</file>
     </qresource>
 </RCC>

@@ -14,6 +14,7 @@ SOURCES += \
     level2.cpp \
     main.cpp \
     map.cpp \
+    mydialog.cpp \
     scene.cpp
 
 HEADERS += \
@@ -21,12 +22,14 @@ HEADERS += \
     level1.h \
     level2.h \
     map.h \
+    mydialog.h \
     scene.h
 
 FORMS += \
     level1.ui \
     level2.ui \
     map.ui \
+    mydialog.ui \
     scene.ui
 
 TRANSLATIONS += \
