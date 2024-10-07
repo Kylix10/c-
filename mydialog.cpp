@@ -55,7 +55,7 @@ void MyDialog::initScene()
                              "padding: 10px; " // 增加内边距，避免文字直接贴边
                              "font-size: 26px; " // 设置文字大小
                              "}");
-    ui->label2->setText("你感到头痛欲裂... ...");
+    ui->label2->setText("你感到头痛欲裂... ...\r\n[你睁开眼，面前是一个风尘仆仆的古装男人]\r\n[点击“确定”开始对话]");
     ui->label2->setAlignment(Qt::AlignCenter);
     ui->label2->setVisible(true); // 初始显示
 
@@ -65,15 +65,15 @@ void MyDialog::initScene()
     // 连接 timer2 的信号和槽（只连接一次）
     connect(timer2, &QTimer::timeout, this, &MyDialog::onTimer2Timeout);
     // 启动 QTimer，设置延迟时间（例如 3 秒）
-    timer1->start(2500); // 3000 毫秒 = 3 秒
+    timer1->start(3000); // 3000 毫秒 = 3 秒
 
 
     // 初始化文本段落
-    textParagraphs << "   醒醒"
-                   << "     你好啊，小伙子，你来自远方吧。"
-                   << "    我将要启程，"
-                   << "     去探寻书中未曾描绘的山川奇景"
-                   << "    你要跟我一起出发吗";
+    textParagraphs << "   醒醒,醒醒"
+                   << "     小兄弟，光天化日的，\r\n     你怎么就晕倒在大街上了？"
+                   << "    什么？你不知道要去哪里？？"
+                   << "    我？你问我要去干什么？"
+                   << "     我正打算开始我的旅程，\r\n    探寻书中未曾描绘的山川奇景!!\r\n     要跟我一起出发吗？";
 
 
     // 在你的MainWindow或其他适当的类的构造函数或某个初始化函数中设置样式表
@@ -134,6 +134,12 @@ void MyDialog::updateDisplayText()
             // 检查是否还有更多段落，如果没有，则禁用“下一个”按钮
             if (currentParagraphIndex >= textParagraphs.size()) {
                 ui->buttonNext->setEnabled(false);
+                if (!scene) { // 如果map还没创建，则创建它
+
+                    scene= new Scene(nullptr);
+                }
+                this->hide(); // 隐藏当前窗口
+                scene->show(); // 显示第二个窗口
             }
         }
 
