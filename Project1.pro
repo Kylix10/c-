@@ -13,24 +13,30 @@ SOURCES += \
     level1.cpp \
     level2.cpp \
     main.cpp \
+    mainsence1.cpp \
     map.cpp \
     mydialog.cpp \
-    scene.cpp
+    scene.cpp \
+    weight2.cpp
 
 HEADERS += \
     config.h \
     level1.h \
     level2.h \
+    mainsence1.h \
     map.h \
     mydialog.h \
-    scene.h
+    scene.h \
+    weight2.h
 
 FORMS += \
     level1.ui \
     level2.ui \
+    mainsence1.ui \
     map.ui \
     mydialog.ui \
-    scene.ui
+    scene.ui \
+    weight2.ui
 
 TRANSLATIONS += \
     Project1_zh_CN.ts

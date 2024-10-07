@@ -4,5 +4,10 @@
         <file>dialogue_back.jpg</file>
         <file>dialogue.png</file>
         <file>black.jpg</file>
+        <file>res/A.png</file>
+        <file>res/D.png</file>
+        <file>res/first_page(2).jpg</file>
+        <file>res/S.png</file>
+        <file>res/W.png</file>
     </qresource>
 </RCC>
