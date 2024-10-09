@@ -1,6 +1,6 @@
 QT       += core gui
 QMAKE_PROJECT_DEPTH = 0
-
+QT       += multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17

@@ -10,6 +10,7 @@ mainsence1::mainsence1(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("万里遐征");
+    setStatusBar(nullptr);
 }
 
 mainsence1::~mainsence1()
@@ -23,6 +24,7 @@ mainsence1::~mainsence1()
     }
 
 }
+
 
 void mainsence1::on_pushButton_2_clicked()
 {
@@ -42,4 +44,25 @@ void mainsence1::on_pushButton_clicked()
     this->hide(); // 隐藏当前窗口
     mdl->show(); // 显示第二个窗口
 }//进入对话框界面
+
+
+void mainsence1::on_pushButton_4_clicked()//关闭按键
+{
+    this->close();
+}
+
+
+void mainsence1::on_pushButton_3_clicked()//音乐按键
+{
+
+    QMediaPlayer *player = new QMediaPlayer;
+    QAudioOutput *audioOutput = new QAudioOutput;
+    connect(ui->pushButton_3, &QPushButton::clicked, this, &mainsence1::on_pushButton_3_clicked);
+    player->setAudioOutput(audioOutput);
+    player->setSource(QUrl::fromLocalFile("D:\\c-\\res\\M500000rv3ic2LlIPm.mp3"));//因为歌曲本地存储不同可能要更改歌的所在目录
+    audioOutput->setVolume(50);
+    player->play();
+
+}//播放音乐
+
 

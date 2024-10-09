@@ -9,7 +9,7 @@ level1::level1(QWidget *parent)
 {
     ui->setupUi(this);
 
-    initScene();
+
 
 
     //下面这三行是设置了人物图片，如果有别的需要可以删除用自己的办法写

@@ -1,5 +1,5 @@
 #include "mainsence1.h"
-
+#include "level1.h"
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>

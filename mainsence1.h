@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include <weight2.h>
-
+#include <QMediaPlayer>
+#include <QAudioOutput>
 #include <mydialog.h>
 namespace Ui {
 class mainsence1;
@@ -22,9 +23,15 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_3_clicked();
+
+
 private:
     Ui::mainsence1 *ui;
     MyDialog*mdl;
+
 
 };
 
