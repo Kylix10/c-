@@ -2,7 +2,7 @@
 #define LEVEL1_H
 
 #include <QWidget>
-
+#include<QLabel>
 #include<QPixmap>//插入图片用
 
 namespace Ui {
@@ -18,6 +18,7 @@ public:
     ~level1();
 
     void initScene();
+    void pick();
 
 
 
