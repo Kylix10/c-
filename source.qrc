@@ -9,5 +9,9 @@
         <file>res/first_page(2).jpg</file>
         <file>res/S.png</file>
         <file>res/W.png</file>
+        <file>bag_picture/huangshan.png</file>
+        <file>bag_picture/jiuzhai.png</file>
+        <file>bag_picture/bag_backgroud.png</file>
+        <file>bag_picture/detail.png</file>
     </qresource>
 </RCC>

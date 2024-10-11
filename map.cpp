@@ -1,6 +1,6 @@
 #include "map.h"
 #include "ui_map.h"
-
+#include <QMessageBox>
 #include"config.h"
 
 Map::Map(QWidget *parent)
@@ -13,8 +13,12 @@ Map::Map(QWidget *parent)
 
     initScene();
 
-    connect(ui->btn1, &QPushButton::clicked, this, &Map::on_btn1_clicked); // 连接信号与槽
-    connect(ui->btn2, &QPushButton::clicked, this, &Map::on_btn2_clicked); // 连接信号与槽
+    //connect(ui->btn1, &QPushButton::clicked, this, &Map::on_btn1_clicked); // 连接信号与槽
+    //connect(ui->btn2, &QPushButton::clicked, this, &Map::on_btn2_clicked); // 连接信号与槽
+
+
+
+    // Example: Add item to backpack after completing a level (simulated here)
 
 
 }
@@ -35,6 +39,7 @@ Map::~Map()
         lv2 = nullptr; // 可选：将指针设置为nullptr，但在这个析构函数中它已经是作用域末尾了
     }
 
+
 }
 
 void Map::initScene()
@@ -48,7 +53,6 @@ void Map::initScene()
 
 
 //以下处理各关卡按钮点击跳转对应关卡界面的操作，一个按钮的点击声明一个对象
-
 void Map::on_btn1_clicked()
 {
     if (!lv1) { // 如果map还没创建，则创建它
@@ -57,7 +61,6 @@ void Map::on_btn1_clicked()
     }
     this->hide(); // 隐藏当前窗口
     lv1->show(); // 显示第二个窗口
-
 
 }
 
@@ -70,7 +73,8 @@ void Map::on_btn2_clicked()
     }
     this->hide(); // 隐藏当前窗口
     lv2->show(); // 显示第二个窗口
-
+   // addToBackpack(":/images/image2.png");
+    //QMessageBox::information(this, "哟呵", "你教徐霞客拍摄了一张照片!");
 }
 
 
@@ -91,5 +95,24 @@ void Map::on_btn5_clicked()
 
 }
 
-
 //该模块作者自行添加图片，做好界面布局
+
+
+
+//背包相关函数
+void Map::addToBackpack(const QString &imagePath) {
+    b_pictures.append(BackpackItem(imagePath));
+    // You can add a QMessageBox or log to confirm the addition for debugging
+
+}
+//打开背包
+
+void Map::on_backpackButton_clicked()
+{
+     addToBackpack(":/new/prefix1/bag_picture/huangshan.png");
+     QMessageBox::information(this, "哟呵", "你拍摄了一张照片!");
+    backpack *backpackWindow = new backpack(this,b_pictures);
+    backpackWindow->show();
+
+}
+
