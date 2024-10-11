@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/new/prefix1">
-        <file>character1.png</file>
         <file>dialogue_back.jpg</file>
         <file>dialogue.png</file>
         <file>black.jpg</file>
@@ -13,5 +12,7 @@
         <file>bag_picture/jiuzhai.png</file>
         <file>bag_picture/bag_backgroud.png</file>
         <file>bag_picture/detail.png</file>
+        <file>res/level1.jpg</file>
+        <file>res/man.png</file>
     </qresource>
 </RCC>
