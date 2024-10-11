@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>关卡1</string>
+    <string>黄山</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn2">
@@ -36,7 +36,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>关卡2</string>
+    <string>关卡2九寨沟</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn3">
@@ -76,6 +76,19 @@
    </property>
    <property name="text">
     <string>关卡5</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="backpackButton">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>250</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PushButton</string>
    </property>
   </widget>
  </widget>

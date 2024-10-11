@@ -4,7 +4,8 @@
 #include <QWidget>
 #include<level1.h>
 #include<level2.h>
-
+#include<backpack.h>
+#include "backpackitem.h"
 namespace Ui {
 class Map;
 }
@@ -19,7 +20,7 @@ public:
 
     //初始化场景
     void initScene();
-
+    void addToBackpack(const QString &imagePath);
 
 private slots:
     void on_btn1_clicked();
@@ -31,10 +32,13 @@ private slots:
     void on_btn4_clicked();
 
     void on_btn5_clicked();
+//背包相关函数
+
+    void on_backpackButton_clicked();
 
 private:
     Ui::Map *ui;
-
+    QVector<BackpackItem> b_pictures; // 存储图片路径的背包
     level1*lv1;
     level2*lv2;
 
