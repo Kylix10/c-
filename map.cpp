@@ -15,9 +15,6 @@ Map::Map(QWidget *parent)
 
     initScene();
 
-    //connect(ui->btn1, &QPushButton::clicked, this, &Map::on_btn1_clicked); // 连接信号与槽
-    //connect(ui->btn2, &QPushButton::clicked, this, &Map::on_btn2_clicked); // 连接信号与槽
-
 
 
     // Example: Add item to backpack after completing a level (simulated here)
@@ -40,7 +37,7 @@ Map::~Map()
         delete lv2;
         lv2 = nullptr; // 可选：将指针设置为nullptr，但在这个析构函数中它已经是作用域末尾了
     }
-
+    ui->btn1->setText("黄<br>山");
 
 }
 

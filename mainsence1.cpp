@@ -77,7 +77,7 @@ void mainsence1::on_musicbutton_clicked()
         QAudioOutput *audioOutput = new QAudioOutput;
         connect(ui->musicbutton, &QPushButton::clicked, this, &mainsence1::on_musicbutton_clicked);
         player->setAudioOutput(audioOutput);
-        player->setSource(QUrl::fromLocalFile("D:\\c-\\c-\\res\\M500000rv3ic2LlIPm.mp3"));//因为歌曲本地存储不同可能要更改歌的所在目录
+        player->setSource(QUrl::fromLocalFile("C:\\Users\\kaiya\\Desktop\\xuxiake\\res\\M500000rv3ic2LlIPm.mp3"));//因为歌曲本地存储不同可能要更改歌的所在目录
         audioOutput->setVolume(50);
         player->play();
 }

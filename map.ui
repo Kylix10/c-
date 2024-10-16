@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>900</width>
+    <height>506</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,37 +16,79 @@
   <widget class="QPushButton" name="btn1">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>40</y>
-     <width>56</width>
-     <height>18</height>
+     <x>140</x>
+     <y>120</y>
+     <width>61</width>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>隶书</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 209, 121);
+border-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69));</string>
    </property>
    <property name="text">
     <string>黄山</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>16</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="btn2">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>80</y>
-     <width>56</width>
-     <height>18</height>
+     <x>530</x>
+     <y>140</y>
+     <width>61</width>
+     <height>21</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>隶书</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 212, 120);
+border-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69));</string>
+   </property>
    <property name="text">
-    <string>关卡2九寨沟</string>
+    <string>九寨沟</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn3">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>120</y>
+     <y>280</y>
      <width>56</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>3</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <family>隶书</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(251, 207, 123);
+border-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(0, 0, 0, 0), stop:0.52 rgba(0, 0, 0, 0), stop:0.565 rgba(82, 121, 76, 33), stop:0.65 rgba(159, 235, 148, 64), stop:0.721925 rgba(255, 238, 150, 129), stop:0.77 rgba(255, 128, 128, 204), stop:0.89 rgba(191, 128, 255, 64), stop:1 rgba(0, 0, 0, 0));</string>
    </property>
    <property name="text">
     <string>关卡3</string>
@@ -55,11 +97,21 @@
   <widget class="QPushButton" name="btn4">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>160</y>
+     <x>430</x>
+     <y>320</y>
      <width>56</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>隶书</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(252, 206, 122);
+border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));</string>
    </property>
    <property name="text">
     <string>关卡4</string>
@@ -68,11 +120,21 @@
   <widget class="QPushButton" name="btn5">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>210</y>
+     <x>580</x>
+     <y>420</y>
      <width>56</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>隶书</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(249, 209, 121);
+border-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69));</string>
    </property>
    <property name="text">
     <string>关卡5</string>
@@ -81,16 +143,49 @@
   <widget class="QPushButton" name="backpackButton">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>250</y>
+     <x>810</x>
+     <y>470</y>
      <width>80</width>
      <height>24</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>隶书</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 212, 120);
+border-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(0, 0, 0, 255), stop:0.19397 rgba(0, 0, 0, 255), stop:0.202312 rgba(122, 97, 0, 255), stop:0.495514 rgba(76, 58, 0, 255), stop:0.504819 rgba(255, 255, 255, 255), stop:0.79 rgba(255, 255, 255, 255), stop:1 rgba(255, 158, 158, 255));</string>
+   </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>背包</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_image">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>900</width>
+     <height>506</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/map.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label_image</zorder>
+  <zorder>btn1</zorder>
+  <zorder>btn2</zorder>
+  <zorder>btn3</zorder>
+  <zorder>btn4</zorder>
+  <zorder>btn5</zorder>
+  <zorder>backpackButton</zorder>
  </widget>
  <resources/>
  <connections/>
