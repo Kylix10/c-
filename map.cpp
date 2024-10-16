@@ -2,6 +2,8 @@
 #include "ui_map.h"
 #include <QMessageBox>
 #include"config.h"
+#include"backpack.h"
+
 
 Map::Map(QWidget *parent)
     : QWidget(parent)
@@ -59,7 +61,7 @@ void Map::on_btn1_clicked()
 
         lv1= new level1(nullptr);
     }
-    this->hide(); // 隐藏当前窗口
+
     lv1->show(); // 显示第二个窗口
 
 }
@@ -99,20 +101,14 @@ void Map::on_btn5_clicked()
 
 
 
-//背包相关函数
-void Map::addToBackpack(const QString &imagePath) {
-    b_pictures.append(BackpackItem(imagePath));
-    // You can add a QMessageBox or log to confirm the addition for debugging
-
-}
 //打开背包
 
 void Map::on_backpackButton_clicked()
 {
-     addToBackpack(":/new/prefix1/bag_picture/huangshan.png");
+     additems.addToBackpack(":/new/prefix1/bag_picture/huangshan.png");
      QMessageBox::information(this, "哟呵", "你拍摄了一张照片!");
-    backpack *backpackWindow = new backpack(this,b_pictures);
-    backpackWindow->show();
+     backpack *backpackWindow = new backpack(this);
+     backpackWindow->show();
 
 }
 

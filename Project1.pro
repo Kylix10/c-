@@ -13,6 +13,7 @@ CONFIG += c++17
 
 SOURCES += \
     LargeImageWidget.cpp \
+    additiem.cpp \
     backpack.cpp \
     level1.cpp \
     level2.cpp \
@@ -20,11 +21,13 @@ SOURCES += \
     mainsence1.cpp \
     map.cpp \
     mydialog.cpp \
+    pickshow.cpp \
     scene.cpp \
     weight2.cpp
 
 HEADERS += \
     LargeImageWidget.h \
+    additiem.h \
     backpack.h \
     backpackitem.h \
     config.h \
@@ -33,6 +36,7 @@ HEADERS += \
     mainsence1.h \
     map.h \
     mydialog.h \
+    pickshow.h \
     scene.h \
     weight2.h
 
@@ -44,6 +48,7 @@ FORMS += \
     mainsence1.ui \
     map.ui \
     mydialog.ui \
+    pickshow.ui \
     scene.ui \
     weight2.ui
 

@@ -2,10 +2,9 @@
 #define MAP_H
 
 #include <QWidget>
-#include<level1.h>
-#include<level2.h>
-#include<backpack.h>
-#include "backpackitem.h"
+#include <level1.h>
+#include <level2.h>
+#include <additiem.h>
 namespace Ui {
 class Map;
 }
@@ -20,7 +19,7 @@ public:
 
     //初始化场景
     void initScene();
-    void addToBackpack(const QString &imagePath);
+
 
 private slots:
     void on_btn1_clicked();
@@ -38,7 +37,7 @@ private slots:
 
 private:
     Ui::Map *ui;
-    QVector<BackpackItem> b_pictures; // 存储图片路径的背包
+
     level1*lv1;
     level2*lv2;
 
