@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    Map w1;//开始
+    mainsence1 w1;//开始
 
     w1.show();//展示界面1
 

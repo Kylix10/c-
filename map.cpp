@@ -13,9 +13,6 @@ Map::Map(QWidget *parent)
 
     initScene();
 
-    //connect(ui->btn1, &QPushButton::clicked, this, &Map::on_btn1_clicked); // 连接信号与槽
-    //connect(ui->btn2, &QPushButton::clicked, this, &Map::on_btn2_clicked); // 连接信号与槽
-
 
 
     // Example: Add item to backpack after completing a level (simulated here)
