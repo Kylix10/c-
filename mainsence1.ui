@@ -31,6 +31,9 @@
       <pointsize>16</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:50</string>
+    </property>
     <property name="text">
      <string>开始游戏</string>
     </property>
@@ -61,6 +64,9 @@
       <pointsize>16</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:50</string>
+    </property>
     <property name="text">
      <string>操作指南</string>
     </property>
@@ -75,6 +81,40 @@
     </property>
     <property name="autoRepeatInterval">
      <number>100</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="musicbutton">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>370</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/new/prefix1/res/voice.png);
+border:50</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cancelButton">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>430</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/new/prefix1/res/cancel.png);border:50
+</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
