@@ -35,7 +35,7 @@ backpack::backpack(QWidget *parent)
         label->setAlignment(Qt::AlignCenter);
 
         QPushButton *button = new QPushButton("查看详情");
-        button->setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none;"); // 透明背景和无边框
+        button->setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none;font-family:隶书"); // 透明背景和无边框
         connect(button, &QPushButton::clicked, this, [this, item]() {
             LargeImageWidget *viewer = new LargeImageWidget(this, item.imagePath);
             viewer->setAttribute(Qt::WA_DeleteOnClose); // 确保窗口关闭时删除对象

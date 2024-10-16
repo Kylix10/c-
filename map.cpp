@@ -37,7 +37,7 @@ Map::~Map()
         delete lv2;
         lv2 = nullptr; // 可选：将指针设置为nullptr，但在这个析构函数中它已经是作用域末尾了
     }
-
+    ui->btn1->setText("黄<br>山");
 
 }
 
