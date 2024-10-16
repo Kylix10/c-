@@ -7,6 +7,7 @@
 #include <QString>
 #include <QLabel>
 #include "backpackitem.h"
+#include "additiem.h"
 
 namespace Ui {
 class backpack;
@@ -17,14 +18,14 @@ class backpack : public QWidget
     Q_OBJECT
 
 public:
-    explicit backpack(QWidget *parent = nullptr, const QVector<BackpackItem> &items = QVector<BackpackItem>());
+    explicit backpack(QWidget *parent = nullptr);
     ~backpack();
 // private slots:
 //     void showImageInViewer(const QString &imagePath);
 private:
     Ui::backpack *ui;
 
-     QVector<BackpackItem> items; // 用于显示图片的标签
+    // QVector<BackpackItem> items; // 用于显示图片的标签
 };
 
 #endif // BACKPACK_H

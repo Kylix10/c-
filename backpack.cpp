@@ -5,9 +5,10 @@
 #include <QLabel>
 #include "LargeImageWidget.h"
 
-backpack::backpack(QWidget *parent, const QVector<BackpackItem> &items)
-    : QWidget(parent), ui(new Ui::backpack), items(items)
+backpack::backpack(QWidget *parent)
+    : QWidget(parent), ui(new Ui::backpack)
 {
+
     ui->setupUi(this);
     this->setWindowFlags(this->windowFlags() | Qt::Window);
     //设置窗口的背景图片
@@ -21,6 +22,7 @@ backpack::backpack(QWidget *parent, const QVector<BackpackItem> &items)
     int rowCount = 0; // 用于跟踪当前行号
     int colIndex = 0; // 计算当前应该放在哪一列
     const int columnsPerRow = 3; // 每行显示的列数
+    QVector<BackpackItem> items=additems.getVector();
     for (const auto &item : items) {
         QLabel *label = new QLabel;
         QPixmap pixmap(item.imagePath);
