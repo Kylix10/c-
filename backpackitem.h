@@ -5,7 +5,6 @@
 class BackpackItem {
 public:
     QString imagePath;
-
     BackpackItem(const QString &path) : imagePath(path) {}
 };
 #endif // BACKPACKITEM_H
