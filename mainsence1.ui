@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/new/prefix1/res/first_page(2).jpg);</string>
+   <string notr="true">background-image: url(:/new/prefix1/res/first_page(2).png);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
