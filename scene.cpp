@@ -16,7 +16,7 @@ Scene::Scene(QWidget *parent)
 
     connect(ui->Yesbtn, &QPushButton::clicked, this, &Scene::on_Yesbtn_clicked); // 连接信号与槽
 
-
+    setStatusBar(nullptr);
 }
 
 Scene::~Scene()

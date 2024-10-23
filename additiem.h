@@ -6,7 +6,7 @@ class AddItiem
 {
 public:
     AddItiem();
-    void const addToBackpack(const QString &imagePath);
+    void const addToBackpack(const QString &imagePath,const QString &imageContent);
     const QVector<BackpackItem>&getVector()const{
         return pictures;
     }

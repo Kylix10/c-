@@ -18,12 +18,10 @@ int main(int argc, char *argv[])
         }
     }
 
-    mainsence1 w1;//开始
+    Scene w1; //开始
 
 
     w1.show();//展示界面1
-
-
 
 
     return a.exec();

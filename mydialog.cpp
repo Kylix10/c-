@@ -43,7 +43,7 @@ void MyDialog::initScene()
     setWindowTitle(GAME_TITLE);
 
     //设置窗口的背景图片
-    QPixmap backgroundPixmap(":/new/prefix1/dialogue_back.jpg"); // 注意替换为你的图片路径
+    QPixmap backgroundPixmap(":/new/prefix1/res/dialogue_back.png"); // 注意替换为你的图片路径
     QPalette palette;
     palette.setBrush(QPalette::Window, backgroundPixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     this->setPalette(palette);
@@ -86,6 +86,11 @@ void MyDialog::initScene()
                                "font-size: 24px; " // 设置文字大小
                                "}");
     ui->label->setVisible(false); // 初始隐藏
+    ui->buttonNext->setStyleSheet("QPushButton {"
+                             "background-color: rgb(226, 193, 124);"  // 背景颜色为绿色
+
+                             //"border: 2px solid rgb(0, 0, 0);"  // 边框颜色为黑色，宽度为2px
+                             "}");
 
  }
 QString currentText="";
