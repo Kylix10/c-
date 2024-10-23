@@ -28,7 +28,8 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>16</pointsize>
+      <family>隶书</family>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -61,7 +62,8 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>16</pointsize>
+      <family>隶书</family>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -124,7 +126,7 @@ border:50</string>
      <x>0</x>
      <y>0</y>
      <width>900</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
