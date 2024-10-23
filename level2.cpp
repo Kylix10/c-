@@ -47,8 +47,8 @@ level2::level2(QWidget *parent)
 
 
 
-    mBackGround.setPixmap(QPixmap(":/new/prefix1/res/level2.png")); // 注意替换为你的图片路径
-    Fire.setPixmap(QPixmap(":/new/prefix1/res/man.png"));
+    mBackGround.setPixmap(QPixmap(":/new/prefix1/res/level2(1).png")); // 背景路径（可用ps把像素改为900*506不然背景显示不完全
+    Fire.setPixmap(QPixmap(":/new/prefix1/res/man.png"));//人物路径
 
 
     Fire.setPos(60,398);
@@ -83,13 +83,13 @@ void level2::paintEvent(QPaintEvent*)
 
 //判断冰面
 int judgeicefloor1(double X,double Y){
-    if(X>=395&&X<=445&&Y>=398&&Y<=410) return 1;
+    if(X>=400&&X<=435&&Y>=398&&Y<=410) return 1;
     return 0;
 }
 //判断毒面
 int judgepoisonousfloor1(double X,double Y)
 {
-    if(X>=378&&X<=423&&Y>=306&&Y<=340)return 1;
+    if(X>=540&&X<=550&&Y>=306&&Y<=340)return 1;
     return 0;
 }
 
@@ -98,16 +98,16 @@ int level2::judgefloor(double X, double Y) {
     // 根据新的背景尺寸调整坐标范围
     if ((X >= 93 && X <= 130 && Y >= 95 && Y <= 105) ||
         (X >= 18 && X <= box1.x() + 36 && Y >= 237 && Y <= 240) ||
-        (X >= 518 && X <= 565 && Y >= 175 && Y <= 185) ||
-        (X >= 18 && X <= 562 && Y >= 398 && Y <= 410) ||
-        (X >= 515 && X <= 565 && Y >= 354 && Y <= 370) ||
-        (X >= 240 && X <= 510 && Y >= 306 && Y <= 315) ||
-        (X >= 20 && X <= 240 && Y >= 277 && Y <= 285) ||
-        (X >= 70 && X <= 285 && Y >= 195 && Y <= 210) ||
-        (X >= 285 && X <= 565 && Y >= 215 && Y <= 230) ||
-        (X >= 20 && X <= 500 && Y >= 140 && Y <= 160) ||
-        (X >= 15 && X <= 95 && Y >= 80 && Y <= 100) ||
-        (X >= 160 && X <= 560 && Y >= 65 && Y <= 75))
+        (X >= 720 && X <=800 && Y >= 175 && Y <= 185) ||//第三层箱子地面
+        (X >= 18 && X <= 900 && Y >= 398 && Y <= 410) ||//最底部地面
+        (X >= 720 && X <= 800 && Y >= 354 && Y <= 370) ||//最底部最右
+        (X >= 240 && X <= 710 && Y >= 306 && Y <= 315) ||//第二层较低侧
+        (X >= 10 && X <= 340 && Y >= 277 && Y <= 306) ||//第二次较高侧
+        (X >= 70 && X <= 360 && Y >= 195 && Y <= 210) ||//第三层较高侧
+        (X >= 360 && X <= 790 && Y >= 215 && Y <= 230) ||//第三次较低侧
+        (X >= 20 && X <= 710 && Y >= 140 && Y <= 160) ||//第四层地面
+        (X >= 10 && X <= 110 && Y >= 80 && Y <= 100) ||
+        (X >= 160 && X <= 790 && Y >= 65 && Y <= 75))//第五层
     {
         return 1;
     }
@@ -116,25 +116,26 @@ int level2::judgefloor(double X, double Y) {
 //判断是否撞左墙
 int judgeleftwall1(double X, double Y) {
     // 根据新的背景尺寸调整坐标范围
-    if ((X <= 134 && Y >= 105 && Y <= 146) ||
+    if ((X <= 120 && Y >= 105 && Y <= 146) ||
         (X <= 95 && Y >= 100 && Y <= 145) ||
-        X <= 20 ||
+        X <= 20 ||//最左墙
         (X >= 55 && X <= 60 && Y >= 237 && Y <= 281) ||
-        (X >= 255 && X <= 260 && Y >= 280 && Y <= 310) ||
-        (X >= 280 && X <= 295 && Y >= 213 && Y <= 218))
+        (X >= 255 && X <= 350 && Y >= 280 && Y <= 310) ||//第二层中间斜坡
+        (X >= 20 && X <= 295 && Y >= 213 && Y <= 218))
         return 1;
     return 0;
 }
 //判断是否撞右墙
 int judgerightwall1(double X, double Y) {
     // 根据新的背景尺寸调整坐标范围
-    if (X >= 560 || (X >= 515 && Y <= 410 && Y >= 397) || (X >= 516 && Y >= 185 && Y <= 220))
-        return 1;
+    if (X >= 790 || (X >= 720 && Y <= 410 && Y >= 397) || (X >= 720 && Y >= 185 && Y <= 220))
+        //最右边的墙      //最底层最右的墙                       //第三层最右的墙
+      return 1;
     return 0;
 }
 //判断头是否会撞墙
-int judgehead1(double X, double Y) {
-    // 根据新的背景尺寸调整坐标范围
+int judgehead1(double X, double Y) {//目测这函数不用改
+
     if ((X >= 15 && X <= 190 && Y >= 365 && Y <= 385) ||
         (X >= 250 && X <= 500 && Y >= 335 && Y <= 355) ||
         (X >= 20 && X <= 500 && Y >= 170 && Y <= 190) ||
@@ -145,7 +146,7 @@ int judgehead1(double X, double Y) {
 //判断是否胜利
 int judgewin1(double X,double Y)
 {
-    if(X>=470&&X<=495&&Y>=55&&Y<=75)return 1;
+    if(X>=700&&X<=720&&Y>=55&&Y<=75)return 1;
     return 0;
 }
 
