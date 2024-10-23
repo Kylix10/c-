@@ -64,7 +64,7 @@ void level1::pick(){
     // 检测两个矩形区域是否有重叠
     if (labelRect.intersects(targetRect)) {
         // QLabel的边界触及或落入了目标坐标范围
-        additems.addToBackpack(":/new/prefix1/bag_picture/huangshan.png");
+        additems.addToBackpack(":/new/prefix1/bag_picture/huangshan.png","    徐霞客一生曾于明万历四十四年和万历四十六年两游黄山，并留《游黄山日记》予后世。其中所载黄山四绝：奇松、怪石、云海、温泉惊奇绝艳，正所谓“五岳归来不看山，黄山归来不看岳”。");
         ui->item1->hide();
 
     }

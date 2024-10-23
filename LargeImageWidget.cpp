@@ -1,10 +1,11 @@
 #include "LargeImageWidget.h"
 #include "ui_LargeImageWidget.h"
 
-LargeImageWidget::LargeImageWidget(QWidget *parent, const QString &imagePath)
+LargeImageWidget::LargeImageWidget(QWidget *parent, const QString &imagePath,const QString &imageContent)
     : QWidget(parent)
     , ui(new Ui::LargeImageWidget)
     , imagePath(imagePath)
+    ,imageContent(imageContent)
 {
     ui->setupUi(this);
     this->setWindowFlags(this->windowFlags() | Qt::Window);
@@ -15,6 +16,8 @@ LargeImageWidget::LargeImageWidget(QWidget *parent, const QString &imagePath)
     this->setPalette(palette);
 
     ui->label->setPixmap(QPixmap(imagePath).scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->label_2->setText(imageContent);
+    //ui->label_2->setWordWrapMode(Qt::WordWrap);
 }
 
 void LargeImageWidget::closeEvent(QCloseEvent *event) {

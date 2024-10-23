@@ -5,6 +5,7 @@
 class BackpackItem {
 public:
     QString imagePath;
-    BackpackItem(const QString &path) : imagePath(path) {}
+    QString description; // 新增文案字段
+    BackpackItem(const QString &path,const QString &content) : imagePath(path),description(content) {}
 };
 #endif // BACKPACKITEM_H
