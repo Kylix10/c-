@@ -74,7 +74,8 @@ void MyDialog::initScene()
 
 
     // 初始化文本段落
-    textParagraphs << "   醒醒,醒醒"
+    textParagraphs << "   ."
+                   << "   醒醒,醒醒"
                    << "     小兄弟，光天化日的，\r\n     你怎么就晕倒在大街上了？"
                    << "    什么？你不知道要去哪里？？"
                    << "    我？你问我要去干什么？"
@@ -99,7 +100,6 @@ void MyDialog::initScene()
     ui->buttonNext->setStyleSheet(
         "QPushButton {"
         "    background-color: rgb(226, 193, 124);"
-
         "    border-radius: 5px;"
         "    border: 2px solid #5c3719;"
         "}"
@@ -119,26 +119,35 @@ void MyDialog::switchLabels()
 //点击按钮显示下一段文本
 void MyDialog::on_buttonNext_clicked()
 {
-    QGraphicsOpacityEffect *m_pGraphicsOpacityEffect = new QGraphicsOpacityEffect(ui->label);
-    m_pGraphicsOpacityEffect->setOpacity(0);
-    ui->label->setGraphicsEffect(m_pGraphicsOpacityEffect);
-    QPropertyAnimation *m_pNameAnimation = new QPropertyAnimation(m_pGraphicsOpacityEffect,"opacity",this);
-    m_pNameAnimation->setEasingCurve(QEasingCurve::Linear);
-    m_pNameAnimation->setDuration(2500);
-    m_pNameAnimation->setDuration(1000); // 动画持续1秒
-    m_pNameAnimation->setStartValue(0);
-    m_pNameAnimation->setEndValue(1);
-    m_pNameAnimation->start(QAbstractAnimation::KeepWhenStopped);
-    // 检查是否还有更多文本段落
-    if (currentParagraphIndex < textParagraphs.size()) {
+    ui->buttonNext->setEnabled(false);
+
+  // 检查是否还有更多文本段落
+    if (currentParagraphIndex < textParagraphs.size()-1) {
+        QGraphicsOpacityEffect *m_pGraphicsOpacityEffect = new QGraphicsOpacityEffect(ui->label);
+        m_pGraphicsOpacityEffect->setOpacity(0);
+        ui->label->setGraphicsEffect(m_pGraphicsOpacityEffect);
+        QPropertyAnimation *m_pNameAnimation = new QPropertyAnimation(m_pGraphicsOpacityEffect,"opacity",this);
+        m_pNameAnimation->setEasingCurve(QEasingCurve::Linear);
+        m_pNameAnimation->setDuration(2500);
+        m_pNameAnimation->setDuration(1000); // 动画持续1秒
+        m_pNameAnimation->setStartValue(0);
+        m_pNameAnimation->setEndValue(1);
+        m_pNameAnimation->start(QAbstractAnimation::KeepWhenStopped);
+        ++currentParagraphIndex; // 移动到下一个段落
+        ui->buttonNext->setEnabled(true);
         currentCharIndex = 0;
         currentText="";
         updateDisplayText();
-    } else {
-        // 可选：如果没有更多文本，可以禁用按钮或显示消息
+    }else {
+        // 如果没有更多段落，处理结束逻辑
+        if (!scene) {
+            scene = new Scene(nullptr);
+        }
+        this->hide();
+        scene->show();
         ui->buttonNext->setEnabled(false);
-        // 或者显示一个消息框告诉用户没有更多文本
     }
+
 }
 //实现打字效果
 // 修改 updateDisplayText 函数以使用现有状态
@@ -154,11 +163,8 @@ void MyDialog::updateDisplayText()
         ui->label->setText(currentText);
         timer2->start(90); // 每90毫秒更新一次文本
     } else {
-        // 如果已经打印完整个段落，则停止定时器并准备下一个段落
+        // 如果已经打印完整个段落，则停止定时器
         timer2->stop();
-        ++currentParagraphIndex; // 移动到下一个段落（如果需要的话）
-        // 如果需要，可以在这里禁用“下一个”按钮或做其他处理
-        // 检查是否还有更多段落，如果没有，则禁用“下一个”按钮
         if (currentParagraphIndex >= textParagraphs.size()) {
             ui->buttonNext->setEnabled(false);
             if (!scene) { // 如果map还没创建，则创建它
@@ -168,6 +174,7 @@ void MyDialog::updateDisplayText()
             this->hide(); // 隐藏当前窗口
             scene->show(); // 显示第二个窗口
         }
+
     }
 
 }
