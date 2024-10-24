@@ -4,8 +4,8 @@
 
 class BackpackItem {
 public:
-    QString imagePath;
-    QString description; // 新增文案字段
+    QString imagePath;   //图片路径
+    QString description; // 文案字段
     BackpackItem(const QString &path,const QString &content) : imagePath(path),description(content) {}
 };
 #endif // BACKPACKITEM_H

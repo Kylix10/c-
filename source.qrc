@@ -22,5 +22,6 @@
         <file>bag_picture/tiantaishan.png</file>
         <file>res/first_page(2).png</file>
         <file>res/level2.png</file>
+        <file>res/level2(1).png</file>
     </qresource>
 </RCC>

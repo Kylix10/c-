@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QStringList>
+#include <QGraphicsOpacityEffect>
+#include <QPropertyAnimation>
 namespace Ui {
 class MyDialog;
 }
@@ -30,13 +32,14 @@ private:
     QTimer *timer2;
     Scene*scene;//指向第二个窗口的指针
     QStringList textParagraphs; // 存储文本段落的列表
+    QGraphicsOpacityEffect *m_pGraphicsOpacityEffect;
+    QPropertyAnimation *m_pNameAnimation;
     int currentParagraphIndex = 0; // 当前显示的文本段落索引
     int currentCharIndex=0;
 private slots:
     void on_buttonNext_clicked();
     void switchLabels();
     void onTimer2Timeout();
-
 
 
 };

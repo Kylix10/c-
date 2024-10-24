@@ -9,6 +9,8 @@
 #include <QBrush>
 #include <QTimer>
 #include <QString>
+#include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
 MyDialog::MyDialog(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MyDialog)
@@ -17,16 +19,26 @@ MyDialog::MyDialog(QWidget *parent)
     , timer1(new QTimer(this))
     , timer2(new QTimer(this))
     , scene(nullptr),
+    m_pGraphicsOpacityEffect(new QGraphicsOpacityEffect(this)),
+    m_pNameAnimation(new QPropertyAnimation(this)),
     currentParagraphIndex(0)
-
 {
     ui->setupUi(this);
     initScene();
+    QGraphicsOpacityEffect *m_pGraphicsOpacityEffect = new QGraphicsOpacityEffect(ui->label);
+    m_pGraphicsOpacityEffect->setOpacity(0);
+    ui->label->setGraphicsEffect(m_pGraphicsOpacityEffect);
+
+    QPropertyAnimation *m_pNameAnimation = new QPropertyAnimation(m_pGraphicsOpacityEffect,"opacity",this);
+    m_pNameAnimation->setEasingCurve(QEasingCurve::Linear);
+    m_pNameAnimation->setDuration(2500);
 }
 
 MyDialog::~MyDialog()
 {
     delete ui;
+    delete m_pGraphicsOpacityEffect;
+    delete m_pNameAnimation;
     // 检查指针是否为nullptr，并仅在非空时删除它
     if (scene!= nullptr) {
         delete scene;
@@ -42,19 +54,12 @@ void MyDialog::initScene()
     //设置窗口标题
     setWindowTitle(GAME_TITLE);
 
-    //设置窗口的背景图片
-    QPixmap backgroundPixmap(":/new/prefix1/res/dialogue_back.png"); // 注意替换为你的图片路径
-    QPalette palette;
-    palette.setBrush(QPalette::Window, backgroundPixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-    this->setPalette(palette);
-
-
     ui->label2->setStyleSheet("QLabel { "
                             "background-image: url(:/new/prefix1/black.jpg); " // 设置背景图片
-                             "color: white; " // 设置文字颜色，以便在深色背景上清晰可见
-                             "padding: 10px; " // 增加内边距，避免文字直接贴边
-                             "font-size: 26px; " // 设置文字大小
-                             "}");
+                              "color: white; " // 设置文字颜色，以便在深色背景上清晰可见
+                              "padding: 10px; " // 增加内边距，避免文字直接贴边
+                              "font-size: 26px; " // 设置文字大小
+                              "}");
     ui->label2->setText("你感到头痛欲裂... ...\r\n[你睁开眼，面前是一个风尘仆仆的古装男人]\r\n[点击“确定”开始对话]");
     ui->label2->setAlignment(Qt::AlignCenter);
     ui->label2->setVisible(true); // 初始显示
@@ -78,35 +83,52 @@ void MyDialog::initScene()
 
     // 在你的MainWindow或其他适当的类的构造函数或某个初始化函数中设置样式表
     ui->label->setStyleSheet("QLabel { "
-                               "background-image: url(:/new/prefix1/dialogue.png); " // 设置背景图片
-                               "background-repeat: no-repeat; " // 防止图片重复
-                               "background-position: center; " // 你可以调整图片的位置
-                               "color: black; " // 设置文字颜色，以便在深色背景上清晰可见
-                               "padding: 10px; " // 增加内边距，避免文字直接贴边
-                               "font-size: 24px; " // 设置文字大小
-                               "}");
-    ui->label->setVisible(false); // 初始隐藏
-    ui->buttonNext->setStyleSheet("QPushButton {"
-                             "background-color: rgb(226, 193, 124);"  // 背景颜色为绿色
-
-                             //"border: 2px solid rgb(0, 0, 0);"  // 边框颜色为黑色，宽度为2px
+                             "background-image: url(:/new/prefix1/dialogue.png); " // 设置背景图片
+                             "background-repeat: no-repeat; " // 防止图片重复
+                             "background-position: center; " // 你可以调整图片的位置
+                             "color: black; " // 设置文字颜色，以便在深色背景上清晰可见
+                             "padding: 10px; " // 增加内边距，避免文字直接贴边
+                             "font-size: 24px; " // 设置文字大小
                              "}");
+    ui->label->setVisible(false); // 初始隐藏
+    //设置窗口的背景图片
+    QPixmap backgroundPixmap(":/new/prefix1/res/dialogue_back.png"); // 注意替换为你的图片路径
+    QPalette palette;
+    palette.setBrush(QPalette::Window, backgroundPixmap.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    this->setPalette(palette);
+    ui->buttonNext->setStyleSheet(
+        "QPushButton {"
+        "    background-color: rgb(226, 193, 124);"
 
- }
+        "    border-radius: 5px;"
+        "    border: 2px solid #5c3719;"
+        "}"
+        );
+}
 QString currentText="";
 //由黑窗到对话框
 void MyDialog::switchLabels()
 {
-        // 停止计时器
-        timer1->stop();
+    // 停止计时器
+    timer1->stop();
 
-        // 切换标签的可见性
-        ui->label->setVisible(true);
-        ui->label2->setVisible(false);
- }
+    // 切换标签的可见性
+    ui->label->setVisible(true);
+    ui->label2->setVisible(false);
+}
 //点击按钮显示下一段文本
 void MyDialog::on_buttonNext_clicked()
 {
+    QGraphicsOpacityEffect *m_pGraphicsOpacityEffect = new QGraphicsOpacityEffect(ui->label);
+    m_pGraphicsOpacityEffect->setOpacity(0);
+    ui->label->setGraphicsEffect(m_pGraphicsOpacityEffect);
+    QPropertyAnimation *m_pNameAnimation = new QPropertyAnimation(m_pGraphicsOpacityEffect,"opacity",this);
+    m_pNameAnimation->setEasingCurve(QEasingCurve::Linear);
+    m_pNameAnimation->setDuration(2500);
+    m_pNameAnimation->setDuration(1000); // 动画持续1秒
+    m_pNameAnimation->setStartValue(0);
+    m_pNameAnimation->setEndValue(1);
+    m_pNameAnimation->start(QAbstractAnimation::KeepWhenStopped);
     // 检查是否还有更多文本段落
     if (currentParagraphIndex < textParagraphs.size()) {
         currentCharIndex = 0;
@@ -122,31 +144,31 @@ void MyDialog::on_buttonNext_clicked()
 // 修改 updateDisplayText 函数以使用现有状态
 void MyDialog::updateDisplayText()
 {
-        QString fullText = textParagraphs.at(currentParagraphIndex);
+    QString fullText = textParagraphs.at(currentParagraphIndex);
 
-        // 如果还有未打印的字符，则继续定时器
-        if (currentCharIndex < fullText.length()) {
+    // 如果还有未打印的字符，则继续定时器
+    if (currentCharIndex < fullText.length()) {
 
-            currentText += fullText.at(currentCharIndex); // 使用已打印的字符
-            // 更新显示的文本
-            ui->label->setText(currentText);
-            timer2->start(90); // 每90毫秒更新一次文本
-        } else {
-            // 如果已经打印完整个段落，则停止定时器并准备下一个段落
-            timer2->stop();
-            ++currentParagraphIndex; // 移动到下一个段落（如果需要的话）
-            // 如果需要，可以在这里禁用“下一个”按钮或做其他处理
-            // 检查是否还有更多段落，如果没有，则禁用“下一个”按钮
-            if (currentParagraphIndex >= textParagraphs.size()) {
-                ui->buttonNext->setEnabled(false);
-                if (!scene) { // 如果map还没创建，则创建它
+        currentText += fullText.at(currentCharIndex); // 使用已打印的字符
+        // 更新显示的文本
+        ui->label->setText(currentText);
+        timer2->start(90); // 每90毫秒更新一次文本
+    } else {
+        // 如果已经打印完整个段落，则停止定时器并准备下一个段落
+        timer2->stop();
+        ++currentParagraphIndex; // 移动到下一个段落（如果需要的话）
+        // 如果需要，可以在这里禁用“下一个”按钮或做其他处理
+        // 检查是否还有更多段落，如果没有，则禁用“下一个”按钮
+        if (currentParagraphIndex >= textParagraphs.size()) {
+            ui->buttonNext->setEnabled(false);
+            if (!scene) { // 如果map还没创建，则创建它
 
-                    scene= new Scene(nullptr);
-                }
-                this->hide(); // 隐藏当前窗口
-                scene->show(); // 显示第二个窗口
+                scene= new Scene(nullptr);
             }
+            this->hide(); // 隐藏当前窗口
+            scene->show(); // 显示第二个窗口
         }
+    }
 
 }
 
