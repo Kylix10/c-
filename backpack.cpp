@@ -22,6 +22,8 @@ backpack::backpack(QWidget *parent)
     int rowCount = 0; // 用于跟踪当前行号
     int colIndex = 0; // 计算当前应该放在哪一列
     const int columnsPerRow = 3; // 每行显示的列数
+
+    //遍历容器中所有图片，并为其创建QLabel对象，进行显示
     QVector<BackpackItem> items=additems.getVector();
     for (const auto &item : items) {
         QLabel *label = new QLabel;
@@ -33,9 +35,10 @@ backpack::backpack(QWidget *parent)
         pixmap = pixmap.scaled(130, 130, Qt::KeepAspectRatio);
         label->setPixmap(pixmap);
         label->setAlignment(Qt::AlignCenter);
-
+        //为每张图片创建按钮
         QPushButton *button = new QPushButton("查看详情");
         button->setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none;font-family:隶书"); // 透明背景和无边框
+        //将按钮连接到显示大图的界面，并传递当前对应的图片和文案
         connect(button, &QPushButton::clicked, this, [this, item]() {
             LargeImageWidget *viewer = new LargeImageWidget(this, item.imagePath,item.description);
             viewer->setAttribute(Qt::WA_DeleteOnClose); // 确保窗口关闭时删除对象
@@ -44,6 +47,7 @@ backpack::backpack(QWidget *parent)
             QWidget::connect(viewer, &LargeImageWidget::windowClosed, this, &backpack::show); // 当viewer关闭时，显示backpack窗口
 
         });
+
         // 将标签和按钮添加到网格布局中
 
         gridLayout->addWidget(label, rowCount, colIndex);       // 标签放在当前行和列

@@ -20,12 +20,8 @@ class backpack : public QWidget
 public:
     explicit backpack(QWidget *parent = nullptr);
     ~backpack();
-// private slots:
-//     void showImageInViewer(const QString &imagePath);
 private:
     Ui::backpack *ui;
-
-    // QVector<BackpackItem> items; // 用于显示图片的标签
 };
 
 #endif // BACKPACK_H
