@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/new/prefix1">
-        <file>dialogue_back.jpg</file>
         <file>dialogue.png</file>
         <file>black.jpg</file>
         <file>res/A.png</file>
@@ -9,11 +8,17 @@
         <file>res/S.png</file>
         <file>res/W.png</file>
         <file>bag_picture/huangshan.png</file>
-        <file>bag_picture/jiuzhai.png</file>
         <file>bag_picture/bag_backgroud.png</file>
         <file>bag_picture/detail.png</file>
         <file>res/level1.jpg</file>
         <file>res/man.png</file>
         <file>res/item1.png</file>
+        <file>res/first_page(2).png</file>
+        <file>bag_picture/fenglin.png</file>
+        <file>bag_picture/xuankongsi.png</file>
+        <file>res/level2.png</file>
+        <file>res/level2(1).png</file>
+        <file>res/item2_.png</file>
+        <file>bag_picture/it2.png</file>
     </qresource>
 </RCC>

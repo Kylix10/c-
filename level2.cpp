@@ -4,37 +4,39 @@
 #include<QTimer>
 #include<QMessageBox>
 #include"windows.h"
+#pragma comment  (lib, "User32.lib")
+#include"config.h"
 
 
 double vx1;
 double vy1;
 double ax1;
 double ay1;
-
 double dx1;
 double dy1;
 
 level2::level2(QWidget *parent)
     : QWidget{parent}
-    , ui(new Ui::level2) {
+    , ui(new Ui::level2),boxItem(nullptr) {
     ui->setupUi(this);
 
 
     //配置关卡信息
-    this->setFixedSize(900,506);
+    initScene();
     // //配置图标
     // this->setWindowIcon(QPixmap(":/new/prefix1/res/man.png"));
-    //设置标题
-    this->setWindowTitle("万里遐征");
+
 
     mScene.setSceneRect(QRect(0,0,900,506));
     mGameView.setSceneRect(QRect(0,0,900,506));
 
-
     // //箱子
-    // box.setPixmap(QPixmap(":/box"));
-    // mBackGround.setPixmap(QPixmap(":/scene0"));
-    // box.setPos(540,215);
+    //QPixmap pixmap(":/new/prefix1/res/item2_.png");
+    //pixmap = pixmap.scaled(35, 35, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    //QGraphicsPixmapItem *boxItem = new QGraphicsPixmapItem(pixmap);
+    //boxItem->setPos(60,398);
+    //boxItem->setZValue(10000); // 或者一个更高的值，只要它比场景中的其他项都要高
+
 
     // box1.setPixmap(QPixmap(":/box"));
     // mBackGround.setPixmap(QPixmap(":/scene0"));
@@ -58,6 +60,9 @@ level2::level2(QWidget *parent)
     mScene.addItem(&mBackGround);
     mScene.addItem(&Fire);
     mGameView.setScene(&mScene);
+
+    mScene.addItem(boxItem);
+
     mGameView.setParent(this);
     mGameView.resize(this->width(), this->height());
     mGameView.show();
@@ -67,18 +72,44 @@ level2::level2(QWidget *parent)
     this->mMediaBG.setLoopCount(QSoundEffect::Infinite);
     this->mMediaBG.play();
 
+    //物品拾取部分
+    QPixmap pixmap_item(":/new/prefix1/res/item2_.png");
+    // 确保 QLabel 的 objectName 在 Qt Designer 中已设置为 labelPicture
+    ui->item2->setPixmap(pixmap_item);
+    // 如果需要调整 QLabel 的大小以适合图片
+    ui->item2->setScaledContents(true);
+    ui->item2->raise();//置于顶层
+    ui->item2->move(60,270);
+
+    //物品拾取对话
+    QPixmap pixmap_dialogue(":/new/prefix1/dialogue.png");
+    // 确保 QLabel 的 objectName 在 Qt Designer 中已设置为 labelPicture
+    ui->dia2->setPixmap(pixmap_dialogue);
+    // 如果需要调整 QLabel 的大小以适合图片
+    ui->dia2->setScaledContents(true);
+    ui->dia2->raise();//置于顶层
+    ui->dia2->move(250,260);
+     ui->dia2->hide();
+
+
 
 }
 void level2::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     QPixmap pix;
-    QPixmap suc;
-    suc.load(":/succeed.jpg");
 
-    painter.drawPixmap(0,0,this->width(),this->height(),pix);
-    if(ret2==QMessageBox::Ok)
-        painter.drawPixmap(0,0,this->width(),this->height(),suc);
+}
+
+
+
+void level2::initScene()
+{
+    //设置窗口的固定尺寸
+    setFixedSize(GAME_WIDTH,GAME_HEIGHT);
+
+    //设置窗口标题
+    setWindowTitle(GAME_TITLE);
 }
 
 //判断冰面
@@ -92,7 +123,6 @@ int judgepoisonousfloor1(double X,double Y)
     if(X>=540&&X<=550&&Y>=306&&Y<=340)return 1;
     return 0;
 }
-
 //判断地面
 int level2::judgefloor(double X, double Y) {
     // 根据新的背景尺寸调整坐标范围
@@ -130,7 +160,7 @@ int judgerightwall1(double X, double Y) {
     // 根据新的背景尺寸调整坐标范围
     if (X >= 790 || (X >= 720 && Y <= 410 && Y >= 397) || (X >= 720 && Y >= 185 && Y <= 220))
         //最右边的墙      //最底层最右的墙                       //第三层最右的墙
-      return 1;
+        return 1;
     return 0;
 }
 //判断头是否会撞墙
@@ -149,6 +179,20 @@ int judgewin1(double X,double Y)
     if(X>=700&&X<=720&&Y>=55&&Y<=75)return 1;
     return 0;
 }
+
+//拾取物品
+int level2::pick(){
+    QRectF targetRect(60,298, 100, 100); // 设定目标矩形区域
+    // 检查火娃是否在目标矩形内
+    QPointF scenePos = Fire.mapToScene(Fire.boundingRect().center()); // 或者使用 fire->pos() + 偏移量，取决于您如何定义火娃的中心
+    if (targetRect.contains(scenePos)) {
+        qDebug() << "Fire is inside the target rectangle!";
+        return 1;
+    }
+    else
+        return 0;
+}
+
 
 
 void level2::timerEvent(QTimerEvent *e)
@@ -175,8 +219,8 @@ void level2::timerEvent(QTimerEvent *e)
             ret2=QMessageBox::information(this,"闯关成功","恭喜你闯关成功！",QMessageBox::Ok);
             if(ret2==QMessageBox::Ok)
             {
-                mGameView.hide();
                 QTimer::singleShot(4000, this, &QWidget::close);
+                this->hide();
             }
         }
         int modex= 0;
@@ -224,6 +268,14 @@ void level2::timerEvent(QTimerEvent *e)
             if(vy1<-6)
                 vy1=-6;
 
+        }
+
+        if((pick())&&flag){
+            ui->item2->hide();
+             additems.addToBackpack(":/new/prefix1/bag_picture/it2.png");
+            QMessageBox::information(this, "拾取物品", "山路上捡到一枚银杏叶!");
+             ui->dia2->show();
+             flag=false;
         }
 
         double x=Fire.x();

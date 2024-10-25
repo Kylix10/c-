@@ -16,6 +16,19 @@
 #include <QTimer>
 #include <QPoint>
 #include <QPixmap>
+#include<QLabel>
+#include <additiem.h>
+
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsPixmapItem>
+#include <QPixmap>
+#include <QTimer>
+#include <QPointF>
+#include <QRectF>
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,12 +41,16 @@ class level2 : public QWidget
 public:
     explicit level2(QWidget *parent = nullptr);
 
+    void initScene();
+    int pick();
+
 protected:
     void paintEvent(QPaintEvent *event);
 
 signals:
 
 private:
+    QVector<BackpackItem> l1_pictures; // 存储图片路径的背包
     int ret2;
     QTimer*PersonMoveTimer;
     Ui::level2 *ui;
@@ -47,9 +64,12 @@ private:
     QGraphicsPixmapItem box1;//箱子
     QGraphicsPixmapItem box2;//箱子
 
+    QGraphicsPixmapItem *boxItem;//拾取的物品
     int judgefloor(double X,double Y);
     void timerEvent(QTimerEvent*e);
     int id1;
+
+    bool flag=true;
 
     QSoundEffect mMediaBG;
 };

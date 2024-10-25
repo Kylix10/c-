@@ -14,7 +14,6 @@ level1::level1(QWidget *parent)
 
     initScene();
 
-
     //下面这三行是设置了人物图片，如果有别的需要可以删除用自己的办法写
 
     QPixmap pixmap_man(":/new/prefix1/res/man.png");
@@ -60,15 +59,12 @@ void level1::initScene()
 void level1::pick(){
     QRect labelRect = ui->Man->geometry(); // 获取QLabel的矩形区域
     QRect targetRect(422, 160, 28, 28); // 设定目标矩形区域
-
     // 检测两个矩形区域是否有重叠
     if (labelRect.intersects(targetRect)) {
         // QLabel的边界触及或落入了目标坐标范围
         additems.addToBackpack(":/new/prefix1/bag_picture/huangshan.png");
         ui->item1->hide();
-
     }
-
 }
 
 

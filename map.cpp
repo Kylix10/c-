@@ -70,7 +70,7 @@ void Map::on_btn2_clicked()
 
         lv2= new level2(nullptr);
     }
-    this->hide(); // 隐藏当前窗口
+   // 隐藏当前窗口
     lv2->show(); // 显示第二个窗口
    // addToBackpack(":/images/image2.png");
     //QMessageBox::information(this, "哟呵", "你教徐霞客拍摄了一张照片!");
