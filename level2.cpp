@@ -6,7 +6,7 @@
 #include"windows.h"
 #pragma comment  (lib, "User32.lib")
 #include"config.h"
-
+#include <QVector>
 
 double vx1;
 double vy1;
@@ -14,46 +14,45 @@ double ax1;
 double ay1;
 double dx1;
 double dy1;
+// 背景图片索引和定时器ID用于图片切换
+int backgroundIndex = 0;
+QTimer *backgroundTimer = nullptr;
+QVector<QPixmap> backgroundImages;
 
 level2::level2(QWidget *parent)
     : QWidget{parent}
     , ui(new Ui::level2),boxItem(nullptr) {
     ui->setupUi(this);
 
-
     //配置关卡信息
     initScene();
     // //配置图标
     // this->setWindowIcon(QPixmap(":/new/prefix1/res/man.png"));
 
+    // 初始化背景图片
+    backgroundImages.append(QPixmap(":/new/prefix1/res/level2(1).png"));
+    backgroundImages.append(QPixmap(":/new/prefix1/res/level2(2).png"));
+    // ... 添加更多背景图片到 backgroundImages 中
 
-    mScene.setSceneRect(QRect(0,0,900,506));
-    mGameView.setSceneRect(QRect(0,0,900,506));
+    mScene.setSceneRect(QRect(0, 0, 900, 506));
+    mGameView.setSceneRect(QRect(0, 0, 900, 506));
+    mBackGround.setPixmap(backgroundImages[backgroundIndex]);
+    Fire.setPixmap(QPixmap(":/new/prefix1/res/man.png"));
+    Fire.setPos(60, 398);
 
-    // //箱子
-    //QPixmap pixmap(":/new/prefix1/res/item2_.png");
-    //pixmap = pixmap.scaled(35, 35, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    //QGraphicsPixmapItem *boxItem = new QGraphicsPixmapItem(pixmap);
-    //boxItem->setPos(60,398);
-    //boxItem->setZValue(10000); // 或者一个更高的值，只要它比场景中的其他项都要高
+    mScene.addItem(&mBackGround);
+    mScene.addItem(&Fire);
+    mGameView.setScene(&mScene);
+    mGameView.setParent(this);
+    mGameView.resize(this->width(), this->height());
+    mGameView.show();
 
+    id1=startTimer(10);
 
-    // box1.setPixmap(QPixmap(":/box"));
-    // mBackGround.setPixmap(QPixmap(":/scene0"));
-    // box1.setPos(25,275);
-
-    // box2.setPixmap(QPixmap(":/box"));
-    // mBackGround.setPixmap(QPixmap(":/scene0"));
-    // box2.setPos(100,140);
-
-
-
-
-    mBackGround.setPixmap(QPixmap(":/new/prefix1/res/level2(1).png")); // 背景路径（可用ps把像素改为900*506不然背景显示不完全
-    Fire.setPixmap(QPixmap(":/new/prefix1/res/man.png"));//人物路径
-
-
-    Fire.setPos(60,398);
+    // 初始化背景切换定时器
+    backgroundTimer = new QTimer(this);
+    connect(backgroundTimer, &QTimer::timeout, this, &level2::changeImg);
+    backgroundTimer->start(500); // 每500毫秒切换一次背景
 
 
 
@@ -99,6 +98,11 @@ void level2::paintEvent(QPaintEvent*)
     QPainter painter(this);
     QPixmap pix;
 
+}
+void level2::changeImg() {
+    // 切换背景图片
+    backgroundIndex = (backgroundIndex + 1) % backgroundImages.size();
+    mBackGround.setPixmap(backgroundImages[backgroundIndex]);
 }
 
 
@@ -194,7 +198,6 @@ int level2::pick(){
 }
 
 
-
 void level2::timerEvent(QTimerEvent *e)
 {
     if(e->timerId()==id1)
@@ -272,7 +275,7 @@ void level2::timerEvent(QTimerEvent *e)
 
         if((pick())&&flag){
             ui->item2->hide();
-             additems.addToBackpack(":/new/prefix1/bag_picture/it2.png");
+            additems.addToBackpack(":/new/prefix1/bag_picture/it2.png"," 映荫溪色，香风来处，玉兰芳草，处处不绝。");
             QMessageBox::information(this, "拾取物品", "山路上捡到一枚银杏叶!");
              ui->dia2->show();
              flag=false;

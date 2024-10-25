@@ -67,6 +67,7 @@ private:
     QGraphicsPixmapItem *boxItem;//拾取的物品
     int judgefloor(double X,double Y);
     void timerEvent(QTimerEvent*e);
+    void changeImg();
     int id1;
 
     bool flag=true;
