@@ -13,12 +13,21 @@
         <file>res/level1.jpg</file>
         <file>res/man.png</file>
         <file>res/item1.png</file>
-        <file>res/first_page(2).png</file>
-        <file>bag_picture/fenglin.png</file>
-        <file>bag_picture/xuankongsi.png</file>
-        <file>res/level2.png</file>
-        <file>res/level2(1).png</file>
+
+        
         <file>res/item2_.png</file>
         <file>bag_picture/it2.png</file>
+
+        <file>res/cancel.png</file>
+        <file>res/voice.png</file>
+        <file>res/dialogue_back.png</file>
+        <file>bag_picture/xuankongsi.png</file>
+        <file>bag_picture/fenglin.png</file>
+        <file>bag_picture/shaolinsi.png</file>
+        <file>bag_picture/tiantaishan.png</file>
+        <file>res/first_page(2).png</file>
+        <file>res/level2.png</file>
+        <file>res/level2(1).png</file>
+
     </qresource>
 </RCC>

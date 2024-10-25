@@ -3,9 +3,7 @@
 AddItiem::AddItiem() {}
 
 //背包相关函数
-void const AddItiem::addToBackpack(const QString &imagePath) {
-    pictures.append(BackpackItem(imagePath));
-    // // You can add a QMessageBox or log to confirm the addition for debugging
-
+void const AddItiem::addToBackpack(const QString &imagePath,const QString &imageContent) {
+    pictures.append(BackpackItem(imagePath,imageContent));
 }
 AddItiem additems;
