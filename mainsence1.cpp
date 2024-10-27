@@ -65,20 +65,29 @@ void mainsence1::on_pushButton_clicked()
 
 
 
+QMediaPlayer *player = new QMediaPlayer;
+QAudioOutput *audioOutput = new QAudioOutput;
+int i=1;
+
+void mainsence1::on_musicbutton_clicked()
+{
+    connect(ui->musicbutton, &QPushButton::clicked, this, &mainsence1::on_musicbutton_clicked);
+    player->setAudioOutput(audioOutput);
+    player->setSource(QUrl::fromLocalFile("C:\\Users\\kaiya\\Desktop\\xuxiake\\res\\M500000rv3ic2LlIPm.mp3"));//因为歌曲本地存储不同可能要更改歌的所在目录
+    audioOutput->setVolume(50);
+    if(i){
+        player->play();
+        i--;
+    }
+    else{
+        i=1;
+        player->stop();
+    }
+}
+
 void mainsence1::on_cancelButton_clicked()
 {
     this->close();
 }
 
-
-void mainsence1::on_musicbutton_clicked()
-{
-        QMediaPlayer *player = new QMediaPlayer;
-        QAudioOutput *audioOutput = new QAudioOutput;
-        connect(ui->musicbutton, &QPushButton::clicked, this, &mainsence1::on_musicbutton_clicked);
-        player->setAudioOutput(audioOutput);
-        player->setSource(QUrl::fromLocalFile("C:\\Users\\kaiya\\Desktop\\xuxiake\\res\\M500000rv3ic2LlIPm.mp3"));//因为歌曲本地存储不同可能要更改歌的所在目录
-        audioOutput->setVolume(50);
-        player->play();
-}
 

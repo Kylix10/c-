@@ -229,9 +229,16 @@ void level2::timerEvent(QTimerEvent *e)
         int modex= 0;
         int modey= 0;
         int t=1;
-        if(GetAsyncKeyState('A')&0x8000)modex--;
+
         if(GetAsyncKeyState('W')&0x8000)modey++;
-        if(GetAsyncKeyState('D')&0x8000)modex++;
+        if(GetAsyncKeyState('A')&0x8000) {
+            modex--;
+            Fire.setPixmap(QPixmap(":/new/prefix1/res/manleft.png"));// 面向左
+        }
+        if(GetAsyncKeyState('D')&0x8000) {
+            modex++;
+            Fire.setPixmap(QPixmap(":/new/prefix1/res/man.png"));// 面向右的图片路径 // 面向右
+        }
         if(modex==0)
             vx1=0;
         if(modex==1)
