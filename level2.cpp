@@ -81,14 +81,20 @@ level2::level2(QWidget *parent)
     ui->item2->move(60,270);
 
     //物品拾取对话
-    QPixmap pixmap_dialogue(":/new/prefix1/dialogue.png");
+    QPixmap pixmap_dialogue(":/new/prefix1/res/bubble2.png");
+    QPixmap pixmap_dialogue2(":/new/prefix1/res/bubble1.png");
     // 确保 QLabel 的 objectName 在 Qt Designer 中已设置为 labelPicture
     ui->dia2->setPixmap(pixmap_dialogue);
+    ui->dia2_2->setPixmap(pixmap_dialogue2);
     // 如果需要调整 QLabel 的大小以适合图片
     ui->dia2->setScaledContents(true);
+    ui->dia2_2->setScaledContents(true);
     ui->dia2->raise();//置于顶层
+    ui->dia2_2->raise();//置于顶层
     ui->dia2->move(250,260);
-     ui->dia2->hide();
+    ui->dia2_2->move(250,260);
+    ui->dia2_2->hide();
+    ui->dia2->hide();
 
 
 
@@ -185,9 +191,9 @@ int judgewin1(double X,double Y)
 }
 
 //拾取物品
-int level2::pick(){
-    QRectF targetRect(60,298, 100, 100); // 设定目标矩形区域
-    // 检查火娃是否在目标矩形内
+int level2::pick(int x,int y,int wide,int height){
+    QRectF targetRect(x,y,wide,height); // 设定目标矩形区域
+    // 检查人是否在目标矩形内
     QPointF scenePos = Fire.mapToScene(Fire.boundingRect().center()); // 或者使用 fire->pos() + 偏移量，取决于您如何定义火娃的中心
     if (targetRect.contains(scenePos)) {
         qDebug() << "Fire is inside the target rectangle!";
@@ -195,6 +201,7 @@ int level2::pick(){
     }
     else
         return 0;
+    qDebug() << "OUT";
 }
 
 
@@ -280,13 +287,26 @@ void level2::timerEvent(QTimerEvent *e)
 
         }
 
-        if((pick())&&flag){
+        if((pick(60,270, 50, 50))&&flag==1){
             ui->item2->hide();
+
             additems.addToBackpack(":/new/prefix1/bag_picture/it2.png"," 映荫溪色，香风来处，玉兰芳草，处处不绝。");
+
+            ui->dia2->show();
+            flag=2;
+            QEventLoop loop;
+            QTimer::singleShot(2000, &loop, &QEventLoop::quit); // 2秒后退出loop
+            loop.exec(); // 进入事件循环，等待退出
+
+            ui->dia2->hide();
+            ui->dia2_2->show();
+            QTimer::singleShot(1500, &loop, &QEventLoop::quit); // 2秒后退出loop
+            loop.exec(); // 进入事件循环，等待退出
+            ui->dia2_2->hide();
             QMessageBox::information(this, "拾取物品", "山路上捡到一枚银杏叶!");
-             ui->dia2->show();
-             flag=false;
+            flag=0;
         }
+
 
         double x=Fire.x();
         double y=Fire.y();

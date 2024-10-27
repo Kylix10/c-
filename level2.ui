@@ -31,14 +31,36 @@
     <rect>
      <x>200</x>
      <y>140</y>
-     <width>300</width>
-     <height>100</height>
+     <width>400</width>
+     <height>220</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 9pt &quot;华文隶书&quot;;</string>
+   </property>
+   <property name="text">
+    <string>映荫溪色，香风来处，玉兰芳草，处处不绝。</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dia2_2">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>140</y>
+     <width>400</width>
+     <height>220</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 9pt &quot;华文隶书&quot;;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
   </widget>
+  <zorder>item2</zorder>
+  <zorder>dia2_2</zorder>
+  <zorder>dia2</zorder>
  </widget>
  <resources/>
  <connections/>

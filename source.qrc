@@ -15,6 +15,10 @@
         <file>res/item1.png</file>
         <file>res/item2_.png</file>
         <file>bag_picture/it2.png</file>
+        <file>res/bubble.png</file>
+        <file>res/bubble1.png</file>
+        <file>res/bubble2.png</file>
+        <file>res/item3.png</file>
         <file>res/cancel.png</file>
         <file>res/voice.png</file>
         <file>res/dialogue_back.png</file>
@@ -26,5 +30,6 @@
         <file>res/level2(1).png</file>
         <file>res/level2(2).png</file>
         <file>res/1_reverse_man.png</file>
+
     </qresource>
 </RCC>
