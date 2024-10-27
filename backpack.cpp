@@ -10,6 +10,7 @@ backpack::backpack(QWidget *parent)
 {
 
     ui->setupUi(this);
+    this->setWindowTitle("背包");
     this->setWindowFlags(this->windowFlags() | Qt::Window);
     //设置窗口的背景图片
     QPixmap backgroundPixmap(":/new/prefix1/bag_picture/bag_backgroud.png"); // 注意替换为你的图片路径
@@ -35,6 +36,7 @@ backpack::backpack(QWidget *parent)
         pixmap = pixmap.scaled(130, 130, Qt::KeepAspectRatio);
         label->setPixmap(pixmap);
         label->setAlignment(Qt::AlignCenter);
+
         //为每张图片创建按钮
         QPushButton *button = new QPushButton("查看详情");
         button->setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none;font-family:隶书"); // 透明背景和无边框
