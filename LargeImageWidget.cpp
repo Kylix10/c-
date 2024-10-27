@@ -8,6 +8,7 @@ LargeImageWidget::LargeImageWidget(QWidget *parent, const QString &imagePath,con
     ,imageContent(imageContent)
 {
     ui->setupUi(this);
+    this->setWindowTitle("背包");
     this->setWindowFlags(this->windowFlags() | Qt::Window);
     //设置窗口的背景图片
     QPixmap backgroundPixmap(":/new/prefix1/bag_picture/detail.png"); // 注意替换为你的图片路径
