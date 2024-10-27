@@ -20,5 +20,9 @@
         <file>res/level2(1).png</file>
         <file>res/item2_.png</file>
         <file>bag_picture/it2.png</file>
+        <file>res/bubble.png</file>
+        <file>res/bubble1.png</file>
+        <file>res/bubble2.png</file>
+        <file>res/item3.png</file>
     </qresource>
 </RCC>

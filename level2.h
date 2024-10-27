@@ -42,7 +42,7 @@ public:
     explicit level2(QWidget *parent = nullptr);
 
     void initScene();
-    int pick();
+    int pick(int x,int y,int wide,int height);
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -69,7 +69,7 @@ private:
     void timerEvent(QTimerEvent*e);
     int id1;
 
-    bool flag=true;
+    int flag=1;
 
     QSoundEffect mMediaBG;
 };
