@@ -30,6 +30,6 @@
         <file>res/level2(1).png</file>
         <file>res/level2(2).png</file>
         <file>res/1_reverse_man.png</file>
-
+        <file>res/manleft.png</file>
     </qresource>
 </RCC>
