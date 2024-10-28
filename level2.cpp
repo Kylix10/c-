@@ -1,3 +1,4 @@
+
 #include "level2.h"
 #include <QKeyEvent>
 #include <QDebug>
@@ -7,7 +8,8 @@
 #pragma comment  (lib, "User32.lib")
 #include"config.h"
 #include <QVector>
-
+#include "map.h"
+#include <QVBoxLayout>
 double vx1;
 double vy1;
 double ax1;
@@ -21,7 +23,11 @@ QVector<QPixmap> backgroundImages;
 
 level2::level2(QWidget *parent)
     : QWidget{parent}
-    , ui(new Ui::level2),boxItem(nullptr) {
+    , ui(new Ui::level2),boxItem(nullptr)
+    , label(new QLabel(this))
+    , timer1(new QTimer(this))
+
+{
     ui->setupUi(this);
 
     //配置关卡信息
@@ -54,18 +60,7 @@ level2::level2(QWidget *parent)
     connect(backgroundTimer, &QTimer::timeout, this, &level2::changeImg);
     backgroundTimer->start(500); // 每500毫秒切换一次背景
 
-
-
-    mScene.addItem(&mBackGround);
-    mScene.addItem(&Fire);
-    mGameView.setScene(&mScene);
-
     mScene.addItem(boxItem);
-
-    mGameView.setParent(this);
-    mGameView.resize(this->width(), this->height());
-    mGameView.show();
-    id1=startTimer(10);
     //音乐
     this->mMediaBG.setSource(QUrl("qrc:/LevelMusic.wav"));
     this->mMediaBG.setLoopCount(QSoundEffect::Infinite);
@@ -96,9 +91,30 @@ level2::level2(QWidget *parent)
     ui->dia2_2->hide();
     ui->dia2->hide();
 
-
+    label->setStyleSheet("QLabel { "
+                        "background-color: black;"
+                         "color: white; " // 设置文字颜色，以便在深色背景上清晰可见
+                         "padding: 10px; " // 增加内边距，避免文字直接贴边
+                         "font-size: 25px; " // 设置文字大小
+                         "font-family:隶书;"
+                         "}");
+    label->setText("癸丑之三月晦，自宁海出西门。云散日朗，人意山光，俱有喜态。\r\n溪回山合，木石森丽，一转一奇，殊慊所望。\r\n循溪行山下，一带峭壁巉崖，草木盘垂其上，\r\n内多海棠紫荆，映荫溪色，香风来处，玉兰芳草，处处不绝。\r\n             ——《游天台山记》");
+    label->setAlignment(Qt::AlignCenter);
+    label->setScaledContents(true);
+    label->raise();//置于顶层
+    label->setVisible(true); // 初始显示
+    // 创建布局并将label添加到其中
+    QVBoxLayout *layout = new QVBoxLayout(this); // 假设this指向的是父窗口或包含label的widget
+    layout->addWidget(label);
+    layout->setContentsMargins(0, 0, 0, 0); // 设置布局的边距为0（如果需要的话）
+    layout->setSpacing(0); // 设置布局中控件之间的间距为0（如果需要的话）
+    // 连接 QTimer 的 timeout 信号到 slot 函数
+    connect(timer1, &QTimer::timeout, this, &level2::switchLabels);
+    // 启动 QTimer，设置延迟时间（例如 3 秒）
+    timer1->start(3000); // 3000 毫秒 = 3 秒
 
 }
+
 void level2::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
@@ -119,9 +135,21 @@ void level2::initScene()
     setFixedSize(GAME_WIDTH,GAME_HEIGHT);
 
     //设置窗口标题
-    setWindowTitle(GAME_TITLE);
-}
+    setWindowTitle("天台山");
 
+}
+//黑窗
+void level2::switchLabels()
+{
+    // 停止计时器
+    qDebug() << "Switching labels";
+    timer1->stop();
+
+    // 切换标签的可见性
+    label->setVisible(false);
+    // label->hide();
+
+}
 //判断冰面
 int judgeicefloor1(double X,double Y){
     if(X>=400&&X<=435&&Y>=398&&Y<=410) return 1;
@@ -196,7 +224,7 @@ int level2::pick(int x,int y,int wide,int height){
     // 检查人是否在目标矩形内
     QPointF scenePos = Fire.mapToScene(Fire.boundingRect().center()); // 或者使用 fire->pos() + 偏移量，取决于您如何定义火娃的中心
     if (targetRect.contains(scenePos)) {
-        qDebug() << "Fire is inside the target rectangle!";
+        qDebug() << "The character is inside the target rectangle!";
         return 1;
     }
     else
@@ -225,12 +253,14 @@ void level2::timerEvent(QTimerEvent *e)
         }
         if(judgewin1(Fire.x(),Fire.y())==1)
         {
-            Fire.setPos(20,398);
+            Fire.setPos(1000,1000);
             ret2=QMessageBox::information(this,"闯关成功","恭喜你闯关成功！",QMessageBox::Ok);
             if(ret2==QMessageBox::Ok)
             {
                 QTimer::singleShot(4000, this, &QWidget::close);
-                this->hide();
+                this->close();
+                Map m ;
+                m.show();
             }
         }
         int modex= 0;
