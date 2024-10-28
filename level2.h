@@ -48,7 +48,9 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 signals:
+private slots:
 
+    void switchLabels();
 private:
     QVector<BackpackItem> l1_pictures; // 存储图片路径的背包
     int ret2;
@@ -63,7 +65,8 @@ private:
     QGraphicsPixmapItem box;//箱子
     QGraphicsPixmapItem box1;//箱子
     QGraphicsPixmapItem box2;//箱子
-
+    QLabel *label;
+    QTimer *timer1;
     QGraphicsPixmapItem *boxItem;//拾取的物品
     int judgefloor(double X,double Y);
     void timerEvent(QTimerEvent*e);
