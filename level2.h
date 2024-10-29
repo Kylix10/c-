@@ -49,7 +49,6 @@ protected:
 
 signals:
 private slots:
-
     void switchLabels();
 private:
     QVector<BackpackItem> l1_pictures; // 存储图片路径的背包
