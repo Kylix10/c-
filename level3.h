@@ -1,8 +1,7 @@
+#ifndef LEVEL3_H
+#define LEVEL3_H
 
-#ifndef LEVEL2_H
-#define LEVEL2_H
-
-#include "ui_level2.h"
+#include "ui_level3.h"
 #include <QMainWindow>
 #include<QPainter>
 #include <QKeyEvent>
@@ -35,11 +34,11 @@ namespace Ui {
 class Widget;
 }
 QT_END_NAMESPACE
-class level2 : public QWidget
+class level3 : public QWidget
 {
     Q_OBJECT
 public:
-    explicit level2(QWidget *parent = nullptr);
+    explicit level3(QWidget *parent = nullptr);
 
     void initScene();
     int pick(int x,int y,int wide,int height);
@@ -55,7 +54,7 @@ private:
     QVector<BackpackItem> l1_pictures; // 存储图片路径的背包
     int ret2;
     QTimer*PersonMoveTimer;
-    Ui::level2 *ui;
+    Ui::level3 *ui;
     QPoint position;
     QPixmap image;
     QGraphicsView mGameView;//游戏视图
@@ -67,26 +66,27 @@ private:
     QGraphicsPixmapItem box2;//箱子
     QLabel *label;
     QTimer *timer1;
-    QGraphicsPixmapItem *boxItem;//拾取的物品
 
-    int judgeicefloor1(double X,double Y);
-    int judgepoisonousfloor1(double X,double Y);
-    int judgeleftwall1(double X, double Y);
+
+    int judgeicefloor3(double X,double Y);
+    int judgepoisonousfloor3(double X,double Y);
+    int judgeleftwall3(double X, double Y);
     //判断是否撞右墙
-    int judgerightwall1(double X, double Y);
+    int judgerightwall3(double X, double Y);
     //判断头是否会撞墙
-    int judgehead1(double X, double Y);
+    int judgehead3(double X, double Y);
     //判断是否胜利
-    int judgewin1(double X,double Y);
+    int judgewin3(double X,double Y);
     int judgefloor(double X,double Y);
-    void timerEvent(QTimerEvent*e);
 
+    void timerEvent(QTimerEvent*e);
     void changeImg();
     int id1;
 
-    int flag=1;
+    int flag=3;
 
     QSoundEffect mMediaBG;
 };
 
-#endif // GAME_H
+
+#endif // LEVEL3_H

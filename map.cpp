@@ -9,15 +9,14 @@ Map::Map(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Map),
     lv1(nullptr),
-    lv2(nullptr)
+    lv2(nullptr),
+    lv3(nullptr),
+    lv4(nullptr),
+    lv5(nullptr)
 {
     ui->setupUi(this);
 
     initScene();
-
-
-
-    // Example: Add item to backpack after completing a level (simulated here)
 
 
 }
@@ -37,6 +36,26 @@ Map::~Map()
         delete lv2;
         lv2 = nullptr; // 可选：将指针设置为nullptr，但在这个析构函数中它已经是作用域末尾了
     }
+
+    // 检查lv1指针是否为nullptr，并仅在非空时删除它
+    if (lv3 != nullptr) {
+        delete lv3;
+        lv3 = nullptr; // 可选：将指针设置为nullptr，但在这个析构函数中它已经是作用域末尾了
+    }
+
+    // 检查lv1指针是否为nullptr，并仅在非空时删除它
+    if (lv4 != nullptr) {
+        delete lv4;
+        lv4 = nullptr; // 可选：将指针设置为nullptr，但在这个析构函数中它已经是作用域末尾了
+    }
+
+    // 检查lv1指针是否为nullptr，并仅在非空时删除它
+    if (lv5 != nullptr) {
+        delete lv5;
+        lv5 = nullptr; // 可选：将指针设置为nullptr，但在这个析构函数中它已经是作用域末尾了
+    }
+
+
     ui->btn1->setText("黄<br>山");
 
 }
@@ -50,7 +69,26 @@ void Map::initScene()
     setWindowTitle(GAME_TITLE);
 }
 
+void Map::handleLevel1Completion()
+{
+    // 启用第二关按钮
+    ui->btn2->setEnabled(true);
 
+    // 添加相关物品到背包
+    additems.addToBackpack(
+        ":/new/prefix1/bag_picture/huangshan.png",
+        "    徐霞客一生曾于明万历四十四年和万历四十六年两游黄山，并留《游黄山日记》予后世。其中所载黄山"
+        "四绝：奇松、怪石、云海、温泉惊奇绝艳，正所谓\"五岳归来不看山，黄山归来不看岳\"。");
+
+    // 确保地图界面显示
+    this->show();
+
+    // 清理关卡实例
+    if (lv1) {
+        lv1->deleteLater();  // 使用deleteLater而不是直接delete
+        lv1 = nullptr;
+    }
+}
 //以下处理各关卡按钮点击跳转对应关卡界面的操作，一个按钮的点击声明一个对象
 void Map::on_btn1_clicked()
 {
@@ -79,25 +117,44 @@ void Map::on_btn2_clicked()
 
 void Map::on_btn3_clicked()
 {
-    additems.addToBackpack(":/new/prefix1/bag_picture/fenglin.png","    天台山位于浙江省台州市，明万历四十一年徐霞客曾在此停顿近一个月。或许是沉迷于天台山“峰萦水映，木秀石奇；青松紫蕊；攒峦夹翠”的秋景，亦或是和国清寺大师有“如遇故知”的欢喜，终让“游天台山记”成为徐霞客传奇旅途的开篇之作。");
+    if (!lv3) { // 如果map还没创建，则创建它
+
+        lv3= new level3(nullptr);
+    }
+
+    lv3->show(); // 显示第二个窗口
+
+    additems.addToBackpack(":/new/prefix1/bag_picture/fenglin.png","    “天下山峰何其多，惟有此处峰成林！”徐霞客初游万峰林便有此诗传世。而在崇祯十年第二次踏上这片土地更是惊叹其“磅礴数千里，为西南奇胜”，壮丽浩然无需多言");
 }
 
 
 void Map::on_btn4_clicked()
 {
-     additems.addToBackpack(":/new/prefix1/bag_picture/xuankongsi.png","    徐霞客一生曾于明万历四十四年和万历四十六年两游黄山，并留《游黄山日记》予后世。其中所载黄山四绝：奇松、怪石、云海、温泉惊奇绝艳，正所谓“五岳归来不看山，黄山归来不看岳”。");
+    if (!lv4) { // 如果map还没创建，则创建它
+
+        lv4= new level4(nullptr);
+    }
+
+    lv4->show(); // 显示第二个窗口
+
+     additems.addToBackpack(":/new/prefix1/bag_picture/xuankongsi.png","    明崇祯六年夏，徐霞客登恒山而见悬空寺。在西崖之半，“层楼高悬，曲榭斜倚”，遂“仰之神飞，鼓勇独登”，记其“天下巨观”。");
 
 }
 
 
 void Map::on_btn5_clicked()
 {
-     additems.addToBackpack(":/new/prefix1/bag_picture/shaolinsi.png","    徐霞客一生曾于明万历四十四年和万历四十六年两游黄山，并留《游黄山日记》予后世。其中所载黄山四绝：奇松、怪石、云海、温泉惊奇绝艳，正所谓“五岳归来不看山，黄山归来不看岳”。");
+    if (!lv5) { // 如果map还没创建，则创建它
+
+        lv5= new level5(nullptr);
+    }
+
+    lv5->show(); // 显示第二个窗口
+
+     additems.addToBackpack(":/new/prefix1/bag_picture/shaolinsi.png","    明天启三年春，徐霞客登嵩山游少林。正值身强力壮之年，却也显得修身养性，连五日留居名寺，参佛礼征辟山迹。或许这便是少林文化的感染吧。");
 }
 
 //该模块作者自行添加图片，做好界面布局
-
-
 
 //打开背包
 

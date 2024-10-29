@@ -31,5 +31,7 @@
         <file>res/level2(2).png</file>
         <file>res/1_reverse_man.png</file>
         <file>res/manleft.png</file>
+        <file>res/level4(1).png</file>
+        <file>res/level1(2).png</file>
     </qresource>
 </RCC>

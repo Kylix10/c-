@@ -1,5 +1,5 @@
 
-#include "level2.h"
+#include "level3.h"
 #include <QKeyEvent>
 #include <QDebug>
 #include<QTimer>
@@ -10,20 +10,20 @@
 #include <QVector>
 #include "map.h"
 #include <QVBoxLayout>
-double vx1;
-double vy1;
-double ax1;
-double ay1;
-double dx1;
-double dy1;
+double vx3;
+double vy3;
+double ax3;
+double ay3;
+double dx3;
+double dy3;
 // 背景图片索引和定时器ID用于图片切换
-int backgroundIndex = 0;
-QTimer *backgroundTimer = nullptr;
-QVector<QPixmap> backgroundImages;
+int backgroundIndex3 = 0;
+QTimer *backgroundTimer3 = nullptr;
+QVector<QPixmap> backgroundImages3;
 
-level2::level2(QWidget *parent)
+level3::level3(QWidget *parent)
     : QWidget{parent}
-    , ui(new Ui::level2),boxItem(nullptr)
+    , ui(new Ui::level3)
     , label(new QLabel(this))
     , timer1(new QTimer(this))
 
@@ -36,13 +36,13 @@ level2::level2(QWidget *parent)
     // this->setWindowIcon(QPixmap(":/new/prefix1/res/man.png"));
 
     // 初始化背景图片
-    backgroundImages.append(QPixmap(":/new/prefix1/res/level2(1).png"));
-    backgroundImages.append(QPixmap(":/new/prefix1/res/level2(2).png"));
-    // ... 添加更多背景图片到 backgroundImages 中
+    backgroundImages3.append(QPixmap(":/new/prefix1/res/level2(1).png"));
+    backgroundImages3.append(QPixmap(":/new/prefix1/res/level2(2).png"));
+    // ... 添加更多背景图片到 backgroundImages3 中
 
     mScene.setSceneRect(QRect(0, 0, 900, 506));
     mGameView.setSceneRect(QRect(0, 0, 900, 506));
-    mBackGround.setPixmap(backgroundImages[backgroundIndex]);
+    mBackGround.setPixmap(backgroundImages3[backgroundIndex3]);
     Fire.setPixmap(QPixmap(":/new/prefix1/res/man.png"));
     Fire.setPos(60, 398);
 
@@ -56,43 +56,20 @@ level2::level2(QWidget *parent)
     id1=startTimer(10);
 
     // 初始化背景切换定时器
-    backgroundTimer = new QTimer(this);
-    connect(backgroundTimer, &QTimer::timeout, this, &level2::changeImg);
-    backgroundTimer->start(500); // 每500毫秒切换一次背景
+    backgroundTimer3 = new QTimer(this);
+    connect(backgroundTimer3, &QTimer::timeout, this, &level3::changeImg);
+    backgroundTimer3->start(500); // 每500毫秒切换一次背景
 
-    mScene.addItem(boxItem);
     //音乐
     this->mMediaBG.setSource(QUrl("qrc:/LevelMusic.wav"));
     this->mMediaBG.setLoopCount(QSoundEffect::Infinite);
     this->mMediaBG.play();
 
     //物品拾取部分
-    QPixmap pixmap_item(":/new/prefix1/res/item2_.png");
-    // 确保 QLabel 的 objectName 在 Qt Designer 中已设置为 labelPicture
-    ui->item2->setPixmap(pixmap_item);
-    // 如果需要调整 QLabel 的大小以适合图片
-    ui->item2->setScaledContents(true);
-    ui->item2->raise();//置于顶层
-    ui->item2->move(60,270);
-
-    //物品拾取对话
-    QPixmap pixmap_dialogue(":/new/prefix1/res/bubble2.png");
-    QPixmap pixmap_dialogue2(":/new/prefix1/res/bubble1.png");
-    // 确保 QLabel 的 objectName 在 Qt Designer 中已设置为 labelPicture
-    ui->dia2->setPixmap(pixmap_dialogue);
-    ui->dia2_2->setPixmap(pixmap_dialogue2);
-    // 如果需要调整 QLabel 的大小以适合图片
-    ui->dia2->setScaledContents(true);
-    ui->dia2_2->setScaledContents(true);
-    ui->dia2->raise();//置于顶层
-    ui->dia2_2->raise();//置于顶层
-    ui->dia2->move(250,260);
-    ui->dia2_2->move(250,260);
-    ui->dia2_2->hide();
-    ui->dia2->hide();
+    //
 
     label->setStyleSheet("QLabel { "
-                        "background-color: black;"
+                         "background-color: black;"
                          "color: white; " // 设置文字颜色，以便在深色背景上清晰可见
                          "padding: 10px; " // 增加内边距，避免文字直接贴边
                          "font-size: 25px; " // 设置文字大小
@@ -109,37 +86,37 @@ level2::level2(QWidget *parent)
     layout->setContentsMargins(0, 0, 0, 0); // 设置布局的边距为0（如果需要的话）
     layout->setSpacing(0); // 设置布局中控件之间的间距为0（如果需要的话）
     // 连接 QTimer 的 timeout 信号到 slot 函数
-    connect(timer1, &QTimer::timeout, this, &level2::switchLabels);
+    connect(timer1, &QTimer::timeout, this, &level3::switchLabels);
     // 启动 QTimer，设置延迟时间（例如 3 秒）
     timer1->start(3000); // 3000 毫秒 = 3 秒
 
 }
 
-void level2::paintEvent(QPaintEvent*)
+void level3::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     QPixmap pix;
 
 }
-void level2::changeImg() {
+void level3::changeImg() {
     // 切换背景图片
-    backgroundIndex = (backgroundIndex + 1) % backgroundImages.size();
-    mBackGround.setPixmap(backgroundImages[backgroundIndex]);
+    backgroundIndex3 = (backgroundIndex3 + 1) % backgroundImages3.size();
+    mBackGround.setPixmap(backgroundImages3[backgroundIndex3]);
 }
 
 
 
-void level2::initScene()
+void level3::initScene()
 {
     //设置窗口的固定尺寸
     setFixedSize(GAME_WIDTH,GAME_HEIGHT);
 
     //设置窗口标题
-    setWindowTitle("天台山");
+    setWindowTitle("万峰林");
 
 }
 //黑窗
-void level2::switchLabels()
+void level3::switchLabels()
 {
     // 停止计时器
     qDebug() << "Switching labels";
@@ -151,18 +128,18 @@ void level2::switchLabels()
 
 }
 //判断冰面
-int level2::judgeicefloor1(double X,double Y){
+int level3::judgeicefloor3(double X,double Y){
     if(X>=400&&X<=435&&Y>=398&&Y<=410) return 1;
     return 0;
 }
 //判断毒面
-int level2::judgepoisonousfloor1(double X,double Y)
+int level3::judgepoisonousfloor3(double X,double Y)
 {
     if(X>=540&&X<=550&&Y>=306&&Y<=340)return 1;
     return 0;
 }
 //判断地面
-int level2::judgefloor(double X, double Y) {
+int level3::judgefloor(double X, double Y) {
     // 根据新的背景尺寸调整坐标范围
     if ((X >= 93 && X <= 130 && Y >= 95 && Y <= 105) ||
         (X >= 18 && X <= box1.x() + 36 && Y >= 237 && Y <= 240) ||
@@ -182,7 +159,7 @@ int level2::judgefloor(double X, double Y) {
     return 0;
 }
 //判断是否撞左墙
-int level2::judgeleftwall1(double X, double Y) {
+int level3::judgeleftwall3(double X, double Y) {
     // 根据新的背景尺寸调整坐标范围
     if ((X <= 120 && Y >= 105 && Y <= 146) ||
         (X <= 95 && Y >= 100 && Y <= 145) ||
@@ -194,7 +171,7 @@ int level2::judgeleftwall1(double X, double Y) {
     return 0;
 }
 //判断是否撞右墙
-int level2::judgerightwall1(double X, double Y) {
+int level3::judgerightwall3(double X, double Y) {
     // 根据新的背景尺寸调整坐标范围
     if (X >= 790 || (X >= 720 && Y <= 410 && Y >= 397) || (X >= 720 && Y >= 185 && Y <= 220))
         //最右边的墙      //最底层最右的墙                       //第三层最右的墙
@@ -202,7 +179,7 @@ int level2::judgerightwall1(double X, double Y) {
     return 0;
 }
 //判断头是否会撞墙
-int level2::judgehead1(double X, double Y) {//目测这函数不用改
+int level3::judgehead3(double X, double Y) {//目测这函数不用改
 
     if ((X >= 15 && X <= 190 && Y >= 365 && Y <= 385) ||
         (X >= 250 && X <= 500 && Y >= 335 && Y <= 355) ||
@@ -212,14 +189,14 @@ int level2::judgehead1(double X, double Y) {//目测这函数不用改
     return 0;
 }
 //判断是否胜利
-int level2::judgewin1(double X,double Y)
+int level3::judgewin3(double X,double Y)
 {
     if(X>=700&&X<=720&&Y>=55&&Y<=75)return 1;
     return 0;
 }
 
 //拾取物品
-int level2::pick(int x,int y,int wide,int height){
+int level3::pick(int x,int y,int wide,int height){
     QRectF targetRect(x,y,wide,height); // 设定目标矩形区域
     // 检查人是否在目标矩形内
     QPointF scenePos = Fire.mapToScene(Fire.boundingRect().center()); // 或者使用 fire->pos() + 偏移量，取决于您如何定义火娃的中心
@@ -233,11 +210,11 @@ int level2::pick(int x,int y,int wide,int height){
 }
 
 
-void level2::timerEvent(QTimerEvent *e)
+void level3::timerEvent(QTimerEvent *e)
 {
     if(e->timerId()==id1)
     {
-        if(judgepoisonousfloor1(Fire.x(),Fire.y())==1||judgeicefloor1(Fire.x(),Fire.y())==1)
+        if(judgepoisonousfloor3(Fire.x(),Fire.y())==1||judgeicefloor3(Fire.x(),Fire.y())==1)
         {
             Fire.setPos(20,398);
 
@@ -251,7 +228,7 @@ void level2::timerEvent(QTimerEvent *e)
                 this->close();
             }
         }
-        if(judgewin1(Fire.x(),Fire.y())==1)
+        if(judgewin3(Fire.x(),Fire.y())==1)
         {
             Fire.setPos(1000,1000);
             ret2=QMessageBox::information(this,"闯关成功","恭喜你闯关成功！",QMessageBox::Ok);
@@ -277,77 +254,77 @@ void level2::timerEvent(QTimerEvent *e)
             Fire.setPixmap(QPixmap(":/new/prefix1/res/man.png"));// 面向右的图片路径 // 面向右
         }
         if(modex==0)
-            vx1=0;
+            vx3=0;
         if(modex==1)
         {
-            if(judgerightwall1(Fire.x(),Fire.y())==1)vx1=0;
-            else vx1=2.2;
+            if(judgerightwall3(Fire.x(),Fire.y())==1)vx3=0;
+            else vx3=2.2;
         }
         if(modex==-1)
         {
-            if(judgeleftwall1(Fire.x(),Fire.y())==1)vx1=0;
+            if(judgeleftwall3(Fire.x(),Fire.y())==1)vx3=0;
             else
             {
-                vx1=-2.2;
+                vx3=-2.2;
             }
         }
         if(judgefloor(Fire.x(),Fire.y())==1)
         {
-            if(modey==1)vy1=6;
+            if(modey==1)vy3=6;
             else
             {
-                vy1=0;
-                ay1=0;
+                vy3=0;
+                ay3=0;
             }
             t=1;
         }
         if(judgefloor(Fire.x(),Fire.y())==0)
         {
-            if(judgehead1(Fire.x(),Fire.y())==1)
-                vy1=-vy1;
-            if(vy1<=6&&vy1>=-6)
+            if(judgehead3(Fire.x(),Fire.y())==1)
+                vy3=-vy3;
+            if(vy3<=6&&vy3>=-6)
             {
-                ay1=0.5;
-                vy1-=ay1;
+                ay3=0.5;
+                vy3-=ay3;
             }
-            if(vy1>6)
-                vy1=6;
-            if(vy1<-6)
-                vy1=-6;
+            if(vy3>6)
+                vy3=6;
+            if(vy3<-6)
+                vy3=-6;
 
         }
 
-        if((pick(60,270, 50, 50))&&flag==1){
-            ui->item2->hide();
+        // if((pick(60,270, 50, 50))&&flag==1){
+        //     ui->item2->hide();
 
-            additems.addToBackpack(":/new/prefix1/bag_picture/it2.png"," 映荫溪色，香风来处，玉兰芳草，处处不绝。");
+        //     additems.addToBackpack(":/new/prefix1/bag_picture/it2.png"," 映荫溪色，香风来处，玉兰芳草，处处不绝。");
 
-            ui->dia2->show();
-            flag=2;
-            QEventLoop loop;
-            QTimer::singleShot(2000, &loop, &QEventLoop::quit); // 2秒后退出loop
-            loop.exec(); // 进入事件循环，等待退出
+        //     ui->dia2->show();
+        //     flag=2;
+        //     QEventLoop loop;
+        //     QTimer::singleShot(2000, &loop, &QEventLoop::quit); // 2秒后退出loop
+        //     loop.exec(); // 进入事件循环，等待退出
 
-            ui->dia2->hide();
-            ui->dia2_2->show();
-            QTimer::singleShot(1500, &loop, &QEventLoop::quit); // 2秒后退出loop
-            loop.exec(); // 进入事件循环，等待退出
-            ui->dia2_2->hide();
-            QMessageBox::information(this, "拾取物品", "山路上捡到一枚银杏叶!");
-            flag=0;
-        }
+        //     ui->dia2->hide();
+        //     ui->dia2_2->show();
+        //     QTimer::singleShot(1500, &loop, &QEventLoop::quit); // 2秒后退出loop
+        //     loop.exec(); // 进入事件循环，等待退出
+        //     ui->dia2_2->hide();
+        //     QMessageBox::information(this, "拾取物品", "山路上捡到一枚银杏叶!");
+        //     flag=0;
+        // }
 
 
         double x=Fire.x();
         double y=Fire.y();
-        dx1+=vx1;
-        dy1+=vy1*t+ay1*t*t/2;
+        dx3+=vx3;
+        dy3+=vy3*t+ay3*t*t/2;
         t++;
-        x+=dx1;
-        y-=dy1;
+        x+=dx3;
+        y-=dy3;
 
         Fire.setPos(x,y);
-        dx1=0,dy1=0;
+        dx3=0,dy3=0;
         modex=0;modey=0;
     }
 }
