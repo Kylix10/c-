@@ -18,6 +18,9 @@ SOURCES += \
     backpack.cpp \
     level1.cpp \
     level2.cpp \
+    level3.cpp \
+    level4.cpp \
+    level5.cpp \
     main.cpp \
     mainsence1.cpp \
     map.cpp \
@@ -34,6 +37,9 @@ HEADERS += \
     config.h \
     level1.h \
     level2.h \
+    level3.h \
+    level4.h \
+    level5.h \
     mainsence1.h \
     map.h \
     mydialog.h \
@@ -46,6 +52,9 @@ FORMS += \
     backpack.ui \
     level1.ui \
     level2.ui \
+    level3.ui \
+    level4.ui \
+    level5.ui \
     mainsence1.ui \
     map.ui \
     mydialog.ui \
