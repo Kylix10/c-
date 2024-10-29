@@ -36,8 +36,8 @@ level3::level3(QWidget *parent)
     // this->setWindowIcon(QPixmap(":/new/prefix1/res/man.png"));
 
     // 初始化背景图片
-    backgroundImages3.append(QPixmap(":/new/prefix1/res/level2(1).png"));
-    backgroundImages3.append(QPixmap(":/new/prefix1/res/level2(2).png"));
+    backgroundImages3.append(QPixmap(":/new/prefix1/res/level3.png"));
+    backgroundImages3.append(QPixmap(":/new/prefix1/res/level3.png"));
     // ... 添加更多背景图片到 backgroundImages3 中
 
     mScene.setSceneRect(QRect(0, 0, 900, 506));
@@ -75,7 +75,7 @@ level3::level3(QWidget *parent)
                          "font-size: 25px; " // 设置文字大小
                          "font-family:隶书;"
                          "}");
-    label->setText("癸丑之三月晦，自宁海出西门。云散日朗，人意山光，俱有喜态。\r\n溪回山合，木石森丽，一转一奇，殊慊所望。\r\n循溪行山下，一带峭壁巉崖，草木盘垂其上，\r\n内多海棠紫荆，映荫溪色，香风来处，玉兰芳草，处处不绝。\r\n             ——《游天台山记》");
+    label->setText("路依西界北行，遥望东界遥峰下，峭峰离立，分行竞颖。\r\n丛立之峰，磅礴数千里，为西南奇胜。\r\n天下山峰何其多，唯有此处峰成林。\r\n                 ——《黔游日记》");
     label->setAlignment(Qt::AlignCenter);
     label->setScaledContents(true);
     label->raise();//置于顶层

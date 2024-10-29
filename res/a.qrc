@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>map.png</file>
+        <file>gamemusic.mp3</file>
     </qresource>
 </RCC>

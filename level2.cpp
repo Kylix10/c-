@@ -98,7 +98,7 @@ level2::level2(QWidget *parent)
                          "font-size: 25px; " // 设置文字大小
                          "font-family:隶书;"
                          "}");
-    label->setText("癸丑之三月晦，自宁海出西门。云散日朗，人意山光，俱有喜态。\r\n溪回山合，木石森丽，一转一奇，殊慊所望。\r\n循溪行山下，一带峭壁巉崖，草木盘垂其上，\r\n内多海棠紫荆，映荫溪色，香风来处，玉兰芳草，处处不绝。\r\n             ——《游天台山记》");
+    label->setText("癸丑之三月晦，自宁海出西门。云散日朗，人意山光，俱有喜态。\r\n溪回山合，木石森丽，一转一奇，殊慊所望。\r\n循溪行山下，一带峭壁巉崖，草木盘垂其上，\r\n内多海棠紫荆，映荫溪色，香风来处，玉兰芳草，处处不绝。\r\n                 ——《游天台山记》");
     label->setAlignment(Qt::AlignCenter);
     label->setScaledContents(true);
     label->raise();//置于顶层

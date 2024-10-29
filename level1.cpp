@@ -33,7 +33,7 @@ level1::level1(QWidget *parent)
     updateCharacterSprite();
 
     // 设置背景
-    QPixmap backgroundPixmap(":/new/prefix1/res/level1.jpg");
+    QPixmap backgroundPixmap(":/new/prefix1/res/level1.jpg.png");
     QPalette palette;
     palette.setBrush(QPalette::Window,
                      backgroundPixmap.scaled(this->size(),
