@@ -33,7 +33,7 @@
         <file>res/level4(1).png</file>
         <file>res/level1(2).png</file>
         <file>res/level1.jpg.png</file>
-        <file>res/level3.png</file>
         <file>res/level5.png</file>
+        <file>res/level3.png</file>
     </qresource>
 </RCC>
