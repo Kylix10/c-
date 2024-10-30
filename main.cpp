@@ -17,7 +17,10 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    QApplication app(argc, argv);
 
+    // 设置QToolTip的样式表
+    app.setStyleSheet("QToolTip { font-family: LiSu; font-size: 18px; }");
 
     mainsence1 w1; //开始
 
