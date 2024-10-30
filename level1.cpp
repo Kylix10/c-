@@ -1,13 +1,15 @@
 #include "level1.h"
+#include <QMessageBox>
+#include <QVBoxLayout>
 #include "config.h"
 #include "ui_level1.h"
-#include <QMessageBox>
-#include<QVBoxLayout>
+
 level1::level1(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::level1)
     , label(new QLabel(this))
     , timer1(new QTimer(this))
+    , currentFrameIndex(0)
     , isFacingRight(true)
     , physicsTimer(nullptr)
     , verticalVelocity(0.0f)
@@ -20,26 +22,25 @@ level1::level1(QWidget *parent)
     , lastKeyPressed(Qt::Key_unknown)
 {
     ui->setupUi(this);
-    setFixedSize(1260, 720);
+    setFixedSize(GAME_WIDTH, GAME_HEIGHT);
     setWindowTitle(GAME_TITLE);
 
     // 加载角色精灵
     loadCharacterSprites();
 
     // 设置角色初始位置和大小
-    ui->Man->setFixedSize(CHARACTER_WIDTH, CHARACTER_HEIGHT);
+    ui->Man->setFixedSize(CHARACTER_WIDTH * GAME_WIDTH/1260, CHARACTER_HEIGHT * GAME_HEIGHT/720);
     ui->Man->setScaledContents(true);
-    ui->Man->move(110, 577);
+    ui->Man->move(79, 405);
     updateCharacterSprite();
 
-    // 设置背景
-    QPixmap backgroundPixmap(":/new/prefix1/res/level1.jpg.png");
-    QPalette palette;
-    palette.setBrush(QPalette::Window,
-                     backgroundPixmap.scaled(this->size(),
-                                             Qt::IgnoreAspectRatio,
-                                             Qt::SmoothTransformation));
-    this->setPalette(palette);
+    // 初始化背景
+    initializeBackground();
+
+    // 初始化并启动背景动画定时器
+    backgroundAnimTimer = new QTimer(this);
+    connect(backgroundAnimTimer, &QTimer::timeout, this, &level1::updateBackgroundFrame);
+    backgroundAnimTimer->start(BACKGROUND_UPDATE_INTERVAL);
 
     // 初始化平台
     initializePlatforms();
@@ -51,56 +52,91 @@ level1::level1(QWidget *parent)
 
     setFocusPolicy(Qt::StrongFocus);
 
+    // 设置开场文字样式和内容
     label->setStyleSheet("QLabel { "
                          "background-color: black;"
-                         "color: white; " // 设置文字颜色，以便在深色背景上清晰可见
-                         "padding: 10px; " // 增加内边距，避免文字直接贴边
-                         "font-size: 25px; " // 设置文字大小
+                         "color: white; "
+                         "padding: 10px; "
+                         "font-size: 25px; "
                          "font-family:隶书;"
                          "}");
-    label->setText("癸丑之三月晦，自宁海出西门。云散日朗，人意山光，俱有喜态。\r\n溪回山合，木石森丽，一转一奇，殊慊所望。\r\n循溪行山下，一带峭壁巉崖，草木盘垂其上，\r\n内多海棠紫荆，映荫溪色，香风来处，玉兰芳草，处处不绝。\r\n             ——《游天台山记》");
+    label->setText(
+        "北望黄山诸峰，片片可掇拾取。\r\n群峰或上或下，或巨或纤，或直或欹，与身穿绕而过。"
+        "\r\n俯窥辗顾，步步生奇，但壑深雪厚，一步一悚。\r\n             ——《游黄山日记》");
     label->setAlignment(Qt::AlignCenter);
     label->setScaledContents(true);
-    label->raise();//置于顶层
-    label->setVisible(true); // 初始显示
+    label->raise();
+    label->setVisible(true);
+
     // 创建布局并将label添加到其中
-    QVBoxLayout *layout = new QVBoxLayout(this); // 假设this指向的是父窗口或包含label的widget
+    QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(label);
-    layout->setContentsMargins(0, 0, 0, 0); // 设置布局的边距为0（如果需要的话）
-    layout->setSpacing(0); // 设置布局中控件之间的间距为0（如果需要的话）
-    // 连接 QTimer 的 timeout 信号到 slot 函数
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+
+    // 连接并启动黑窗计时器
     connect(timer1, &QTimer::timeout, this, &level1::switchLabels);
-    // 启动 QTimer，设置延迟时间（例如 3 秒）
-    timer1->start(3000); // 3000 毫秒 = 3 秒
+    timer1->start(3000);
 }
 
 level1::~level1()
 {
     delete ui;
 }
-//黑窗
-void level1::switchLabels()
+
+void level1::initializeBackground()
 {
-    // 停止计时器
-    qDebug() << "Switching labels";
-    timer1->stop();
+    // 初始化背景图片路径
+    backgroundPaths = {
+        ":/new/prefix1/res/level1.jpg.png",
+        ":/new/prefix1/res/level1(2).png",
+    };
 
-    // 切换标签的可见性
-    label->setVisible(false);
-    // label->hide();
+    // 加载初始背景
+    if (!backgroundPaths.isEmpty()) {
+        currentBackground.load(backgroundPaths[0]);
+        currentBackground = currentBackground.scaled(GAME_WIDTH, GAME_HEIGHT,
+                                                     Qt::IgnoreAspectRatio);
+        // 设置初始背景
+        QPalette palette;
+        palette.setBrush(QPalette::Window, currentBackground);
+        this->setPalette(palette);
+    }
+}
 
+void level1::updateBackgroundFrame()
+{
+    // 更新帧索引
+    currentFrameIndex = (currentFrameIndex + 1) % BACKGROUND_FRAME_COUNT;
+
+    // 加载新的背景帧
+    if (currentFrameIndex < backgroundPaths.size()) {
+        QPixmap newBackground(backgroundPaths[currentFrameIndex]);
+        if (!newBackground.isNull()) {
+            currentBackground = newBackground.scaled(GAME_WIDTH, GAME_HEIGHT,
+                                                     Qt::IgnoreAspectRatio,
+                                                     Qt::SmoothTransformation);
+            // 更新背景
+            QPalette palette;
+            palette.setBrush(QPalette::Window, currentBackground);
+            this->setPalette(palette);
+        }
+    }
 }
 void level1::loadCharacterSprites()
 {
     characterRight.load(":/new/prefix1/res/1_reverse_man.png");
     characterLeft = characterRight.transformed(QTransform().scale(-1, 1));
 
-    characterRight = characterRight.scaled(CHARACTER_WIDTH,
-                                           CHARACTER_HEIGHT,
+    int newWidth = CHARACTER_WIDTH * GAME_WIDTH/1260;
+    int newHeight = CHARACTER_HEIGHT * GAME_HEIGHT/720;
+
+    characterRight = characterRight.scaled(newWidth,
+                                           newHeight,
                                            Qt::KeepAspectRatio,
                                            Qt::SmoothTransformation);
-    characterLeft = characterLeft.scaled(CHARACTER_WIDTH,
-                                         CHARACTER_HEIGHT,
+    characterLeft = characterLeft.scaled(newWidth,
+                                         newHeight,
                                          Qt::KeepAspectRatio,
                                          Qt::SmoothTransformation);
 }
@@ -110,18 +146,24 @@ void level1::initializePlatforms()
     // 清空现有平台
     platforms.clear();
 
-    // 添加基本平台
-    platforms.append({QRect(0, 639, 1260, 41), true});    // 地面
-    platforms.append({QRect(80, 520, 995, 40), false});   // 第一层
-    platforms.append({QRect(880, 400, 320, 40), false});  // 第二层右
-    platforms.append({QRect(80, 400, 640, 40), false});   // 第二层左
-    platforms.append({QRect(440, 280, 520, 40), false});  // 第三层
-    platforms.append({QRect(1000, 160, 200, 40), false}); // 终点层
+    // 按新尺寸添加基本平台
+    platforms.append({QRect(0, 449, 900, 29), true});      // 地面
+    platforms.append({QRect(57, 365, 711, 28), false});    // 第一层
+    platforms.append({QRect(629, 281, 229, 28), false});   // 第二层右
+    platforms.append({QRect(57, 281, 457, 28), false});    // 第二层左
+    platforms.append({QRect(314, 197, 371, 28), false});   // 第三层
+    platforms.append({QRect(714, 112, 143, 28), false});   // 终点层
 
     // 添加边界
-    platforms.append({QRect(0, 0, 1260, 80), true});   // 顶部边界
-    platforms.append({QRect(0, 0, 80, 720), true});    // 左边界
-    platforms.append({QRect(1200, 0, 80, 720), true}); // 右边界
+    platforms.append({QRect(0, 0, 900, 57), true});        // 顶部边界
+    platforms.append({QRect(0, 0, 57, 506), true});        // 左边界
+    platforms.append({QRect(857, 0, 57, 506), true});      // 右边界
+}
+
+void level1::switchLabels()
+{
+    timer1->stop();
+    label->setVisible(false);
 }
 
 void level1::updateCharacterSprite()
@@ -134,23 +176,20 @@ void level1::updateCharacterSprite()
         ui->Man->setPixmap(characterRight);
     }
 }
-// 添加新的通关检测函数
+
 void level1::checkLevelCompletion(const QPoint &pos)
 {
-    // 检查是否在终点层（y坐标在160附近）且x坐标大于1060
-    if (pos.y() >= 80 && pos.y() <= 200 && pos.x() > 1060) {
-        // 停止物理定时器
+    if (pos.y() >= 57 && pos.y() <= 140 && pos.x() > 757) {
+        // 停止所有计时器
         physicsTimer->stop();
+        backgroundAnimTimer->stop();
 
-        // 显示通关提示
         QMessageBox::information(this, "恭喜", "恭喜你通过了第一关！");
 
-        // 发送通关信号
         emit levelCompleted();
 
-        // 使用QTimer::singleShot来确保消息框关闭后再关闭窗口
         QTimer::singleShot(100, this, [this]() {
-            this->close();  // 关闭当前窗口
+            this->close();
         });
     }
 }
@@ -173,7 +212,7 @@ void level1::updatePhysics()
 
     // 垂直移动检测
     if (!isGrounded) {
-        verticalVelocity += GRAVITY;
+        verticalVelocity += GRAVITY;  // 使用新的重力常量
         float proposedY = newPos.y() + verticalVelocity;
         newPos.setY(qBound(GAME_BOUND_TOP,
                            static_cast<int>(proposedY),
@@ -207,8 +246,6 @@ void level1::updatePhysics()
     }
 
     pick();
-
-    // 检查通关条件
     checkLevelCompletion(newPos);
 }
 
@@ -248,12 +285,11 @@ void level1::keyPressEvent(QKeyEvent *event)
         if (isGrounded) {
             isJumping = true;
             isGrounded = false;
-            verticalVelocity = JUMP_FORCE;
+            verticalVelocity = JUMP_FORCE;  // 使用新的跳跃力度常量
         }
         break;
     }
 }
-
 void level1::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->isAutoRepeat())
@@ -288,7 +324,6 @@ void level1::updateMovement()
 
     updateCharacterSprite();
 }
-
 bool level1::checkCollision(const QPoint &pos)
 {
     QRect playerRect(pos, ui->Man->size());
@@ -372,21 +407,12 @@ bool level1::isWithinBounds(const QPoint &pos)
            && pos.y() >= GAME_BOUND_TOP && pos.y() + ui->Man->height() <= GAME_BOUND_BOTTOM;
 }
 
-void level1::initScene()
-{
-    setFixedSize(GAME_WIDTH, GAME_HEIGHT);
-    setWindowTitle(GAME_TITLE);
-}
-
 void level1::pick()
 {
     QRect labelRect = ui->Man->geometry();
-    QRect targetRect(422, 160, 28, 28);
+    QRect targetRect(301, 112, 20, 20); // 按新尺寸调整道具位置
 
     if (labelRect.intersects(targetRect)) {
-        qDebug() << "Collision detected!"; // QLabel的边界触及或落入了目标坐标范围
-        // additems.addToBackpack(":/new/prefix1/bag_picture/huangshan.png","    徐霞客一生曾于明万历四十四年和万历四十六年两游黄山，并留《游黄山日记》予后世。其中所载黄山四绝：奇松、怪石、云海、温泉惊奇绝艳，正所谓“五岳归来不看山，黄山归来不看岳”。");
-        // ui->item1->hide();
         emit collisionOccurred();
     }
 }
