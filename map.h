@@ -24,6 +24,9 @@ public:
     //初始化场景
     void initScene();
 
+  //悬停效果
+protected: bool eventFilter(QObject *obj, QEvent *event) override;
+
 private slots:
     void showText()
     {
@@ -57,7 +60,6 @@ private slots:
     // 新增：处理关卡通关的槽函数
     void handleLevel1Completion();
     //void handleLevel2Completion();
-    bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     Ui::Map *ui;
