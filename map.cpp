@@ -4,7 +4,9 @@
 #include"config.h"
 #include"backpack.h"
 #include<QToolTip>
+
 #include<QFont>
+
 Map::Map(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Map),
@@ -182,9 +184,10 @@ bool Map::eventFilter(QObject *obj, QEvent *event)
         if (event->type() == QEvent::Enter) {
             QString toolTipText = "“五岳归来不看山，黄山归来不看岳”";
             QPoint pos = mapToGlobal(ui->btn1->rect().center());
-            // 向右下方偏移10个像素，可根据实际情况调整偏移量
+            // 根据实际情况调整偏移量
             pos += QPoint(100, 50);
-            QToolTip::showText(pos, toolTipText, ui->btn1); // 应用字体
+            QToolTip::showText(pos, toolTipText, ui->btn1);
+
         } else if (event->type() == QEvent::Leave) {
             QToolTip::hideText();
         }
@@ -193,10 +196,11 @@ bool Map::eventFilter(QObject *obj, QEvent *event)
         if (event->type() == QEvent::Enter) {
             QString toolTipText = "“峰萦水映，木秀石奇；青松紫蕊；攒峦夹翠”";
             QPoint pos2 = mapToGlobal(ui->btn1->rect().center());
-            // 向右下方偏移10个像素，可根据实际情况调整偏移量
+
+            // 根据实际情况调整偏移量
             pos2 += QPoint(330, 80);
-           QPoint pos = mapToGlobal(ui->btn2->rect().bottomRight());
-           QToolTip::showText(pos2, toolTipText, ui->btn2);
+            QToolTip::showText(pos2, toolTipText, ui->btn2);
+
 
         } else if (event->type() == QEvent::Leave) {
             QToolTip::hideText();

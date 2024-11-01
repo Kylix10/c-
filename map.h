@@ -23,24 +23,10 @@ public:
 
     //初始化场景
     void initScene();
+
   //悬停效果
 protected: bool eventFilter(QObject *obj, QEvent *event) override;
-private slots:
-    void on_btn1_clicked();
 
-    void on_btn2_clicked();
-
-    void on_btn3_clicked();
-
-    void on_btn4_clicked();
-
-    void on_btn5_clicked();
-//背包相关函数
-
-    void on_backpackButton_clicked();
-    // 新增：处理关卡通关的槽函数
-    void handleLevel1Completion();
-    //void handleLevel2Completion();
 private slots:
     void showText()
     {
@@ -58,6 +44,23 @@ private slots:
             button->setText("");
         }
     }
+
+    void on_btn1_clicked();
+
+    void on_btn2_clicked();
+
+    void on_btn3_clicked();
+
+    void on_btn4_clicked();
+
+    void on_btn5_clicked();
+//背包相关函数
+
+    void on_backpackButton_clicked();
+    // 新增：处理关卡通关的槽函数
+    void handleLevel1Completion();
+    //void handleLevel2Completion();
+
 private:
     Ui::Map *ui;
 
