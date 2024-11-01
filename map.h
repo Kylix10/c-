@@ -8,6 +8,7 @@
 #include <level4.h>
 #include <level5.h>
 #include <additiem.h>
+#include<QPushButton>
 namespace Ui {
 class Map;
 }
@@ -23,8 +24,24 @@ public:
     //初始化场景
     void initScene();
 
-
 private slots:
+    void showText()
+    {
+        QPushButton* button = qobject_cast<QPushButton*>(sender());
+        if (button)
+        {
+            button->setText("显示的文字");
+        }
+    }
+    void hideText()
+    {
+        QPushButton* button = qobject_cast<QPushButton*>(sender());
+        if (button)
+        {
+            button->setText("");
+        }
+    }
+
     void on_btn1_clicked();
 
     void on_btn2_clicked();
@@ -40,6 +57,7 @@ private slots:
     // 新增：处理关卡通关的槽函数
     void handleLevel1Completion();
     //void handleLevel2Completion();
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     Ui::Map *ui;

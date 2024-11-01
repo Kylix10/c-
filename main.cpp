@@ -17,7 +17,8 @@ int main(int argc, char *argv[])
             break;
         }
     }
-
+    // 设置QToolTip的样式表
+    a.setStyleSheet("QToolTip { font-family: LiSu; font-size: 18px; }");
 
     mainsence1 w1; //开始
 

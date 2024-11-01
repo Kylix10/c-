@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>673</width>
-    <height>501</height>
+    <height>472</height>
    </rect>
   </property>
   <property name="font">
@@ -17,6 +17,9 @@
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"> background-image:url(:/new/prefix1/bag_picture/bag_backgroud.png)</string>
   </property>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">

@@ -3,7 +3,7 @@
 #include <QMessageBox>
 #include"config.h"
 #include"backpack.h"
-
+#include<QToolTip>
 
 Map::Map(QWidget *parent)
     : QWidget(parent)
@@ -18,6 +18,12 @@ Map::Map(QWidget *parent)
 
     initScene();
 
+    // 安装事件过滤器到所有需要的按钮上，例如 ui->btn1
+    ui->btn1->installEventFilter(this);
+    ui->btn2->installEventFilter(this);
+    ui->btn3->installEventFilter(this);
+    ui->btn4->installEventFilter(this);
+    ui->btn5->installEventFilter(this);
 
 }
 
@@ -166,3 +172,68 @@ void Map::on_backpackButton_clicked()
 
 }
 
+bool Map::eventFilter(QObject *obj, QEvent *event)
+{
+
+
+    if (obj == ui->btn1) {
+
+        if (event->type() == QEvent::Enter) {
+            QString toolTipText = "“五岳归来不看山，黄山归来不看岳”";
+            QPoint pos = mapToGlobal(ui->btn1->rect().center());
+            // 根据实际情况调整偏移量
+            pos += QPoint(100, 50);
+            QToolTip::showText(pos, toolTipText, ui->btn1);
+        } else if (event->type() == QEvent::Leave) {
+            QToolTip::hideText();
+        }
+    }
+    else if (obj == ui->btn2) {
+        if (event->type() == QEvent::Enter) {
+            QString toolTipText = "“峰萦水映，木秀石奇；青松紫蕊；攒峦夹翠”";
+            QPoint pos2 = mapToGlobal(ui->btn1->rect().center());
+            // 根据实际情况调整偏移量
+            pos2 += QPoint(330, 80);
+            QToolTip::showText(pos2, toolTipText, ui->btn2);
+
+        } else if (event->type() == QEvent::Leave) {
+            QToolTip::hideText();
+        }
+    }
+    else if (obj == ui->btn3) {
+        if (event->type() == QEvent::Enter) {
+            QString toolTipText = "“天下山峰何其多，惟有此处峰成林！”";
+            QPoint pos3 = mapToGlobal(ui->btn1->rect().center());
+            // 向右下方偏移10个像素，可根据实际情况调整偏移量
+            pos3 += QPoint(80, 290);
+            QToolTip::showText(pos3, toolTipText, ui->btn3);
+        } else if (event->type() == QEvent::Leave) {
+            QToolTip::hideText();
+        }
+    }
+    else if (obj == ui->btn4) {
+        if (event->type() == QEvent::Enter) {
+            QString toolTipText = "“天下巨观！”";
+            QPoint pos4 = mapToGlobal(ui->btn1->rect().center());
+            // 向右下方偏移10个像素，可根据实际情况调整偏移量
+            pos4 += QPoint(360, 270);
+            QToolTip::showText(pos4, toolTipText, ui->btn4);
+        } else if (event->type() == QEvent::Leave) {
+            QToolTip::hideText();
+        }
+    }
+    else if (obj == ui->btn5) {
+        if (event->type() == QEvent::Enter) {
+            QString toolTipText = "“嵩山天下奥，少室险奇特。不到三皇寨，不算少林客”";
+            QPoint pos5 = mapToGlobal(ui->btn1->rect().center());
+            // 向右下方偏移10个像素，可根据实际情况调整偏移量
+            pos5 += QPoint(370, 370);
+            QToolTip::showText(pos5, toolTipText, ui->btn5);
+        } else if (event->type() == QEvent::Leave) {
+            QToolTip::hideText();
+        }
+    }
+
+    // 对于未处理的事件，调用基类的 eventFilter 方法
+    return QObject::eventFilter(obj, event);
+}
