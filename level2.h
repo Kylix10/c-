@@ -60,7 +60,7 @@ private:
     QGraphicsView mGameView;//游戏视图
     QGraphicsScene mScene;//场景
     QGraphicsPixmapItem mBackGround;//背景元素
-    QGraphicsPixmapItem Fire;//火娃
+    QGraphicsPixmapItem Fire;//人物
     QGraphicsPixmapItem box;//箱子
     QGraphicsPixmapItem box1;//箱子
     QGraphicsPixmapItem box2;//箱子
@@ -79,7 +79,7 @@ private:
     int judgewin1(double X,double Y);
     int judgefloor(double X,double Y);
     void timerEvent(QTimerEvent*e);
-
+    void closeEvent(QCloseEvent *event);
     void changeImg();
     int id1;
 

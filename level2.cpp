@@ -1,4 +1,3 @@
-
 #include "level2.h"
 #include <QKeyEvent>
 #include <QDebug>
@@ -127,7 +126,13 @@ void level2::changeImg() {
     mBackGround.setPixmap(backgroundImages[backgroundIndex]);
 }
 
+void level2::closeEvent(QCloseEvent *event) {
+    // 调用重置角色位置的函数
+    Fire.setPos(1000,1000);
 
+    // 确保调用基类的 closeEvent 处理其他关闭事件的逻辑
+    QWidget::closeEvent(event);
+}
 
 void level2::initScene()
 {
