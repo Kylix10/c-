@@ -128,9 +128,10 @@ void level2::changeImg() {
 
 void level2::closeEvent(QCloseEvent *event) {
     // 调用重置角色位置的函数
-    Fire.setPos(1000,1000);
 
+    timer1->stop();
     // 确保调用基类的 closeEvent 处理其他关闭事件的逻辑
+    disconnect(timer1);
     QWidget::closeEvent(event);
 }
 
@@ -240,6 +241,10 @@ int level2::pick(int x,int y,int wide,int height){
 
 void level2::timerEvent(QTimerEvent *e)
 {
+    if (!this->isVisible()) {
+        timer1->stop();
+        return;
+    }
     if(e->timerId()==id1)
     {
         if(judgepoisonousfloor1(Fire.x(),Fire.y())==1||judgeicefloor1(Fire.x(),Fire.y())==1)
